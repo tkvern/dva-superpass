@@ -1,4 +1,16 @@
 @diff: 4px;
+.white {
+    background-color: #fff;
+}
+
+.subTitle {
+    line-height: 16px;
+    font-size: 16px;
+    padding: 15px 0px 9px 0px;
+    position: relative;
+    font-weight: bolder;
+}
+
 .formItem {
     color: rgba(0, 0, 0, .65);
     box-sizing: border-box;
@@ -11,6 +23,7 @@
         display: block;
         text-align: left;
         line-height: 1.5;
+        font-size: 12px;
         label {
             color: rgba(0, 0, 0, .85);
             position: relative;
@@ -27,7 +40,8 @@
             .ant-radio-button-wrapper {
                 text-align: center;
                 width: 25%;
-                height: 42px;
+                height: 44px;
+                line-height: 44px;
             }
         }
     }
@@ -75,7 +89,8 @@
 
 .priceIncome {
     font-size: 28px;
-    font-weight: bolder;
+    font-weight: 300;
+    white-space: nowrap;
     margin: 0px;
     color: #3fc295;
 }
@@ -86,7 +101,7 @@
 
 :global {
     .am-green {
-        color: #fff!important;
+        color: #fff !important;
         background-color: #3fc295;
         border: 1px solid #3fc295;
         margin-right: 4px;
@@ -99,7 +114,7 @@
         background-color: #329e79;
     }
     .am-red {
-        color: #fff!important;
+        color: #fff !important;
         background-color: #e14d4e;
         border: 1px solid #e14d4e;
         margin-left: 4px;

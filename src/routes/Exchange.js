@@ -13,7 +13,6 @@ function Exchange() {
         <NoticeBar className="test" mode="closable" marqueeProps={{ loop: true }} action={<span style={{ color: '#a1a1a1' }}>不再提示</span>}>
           Tip:交易有盈亏，入场需谨慎
         </NoticeBar>
-        <div className={style.subTitle}>交易-BTC</div>
         <ExchangePanel />
       </div>
     </MainLayout>
