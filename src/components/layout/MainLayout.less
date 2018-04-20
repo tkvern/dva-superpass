@@ -1,0 +1,32 @@
+.content {
+    touch-action: pan-x pan-y;
+    position: relative;
+    @diff: 50px;
+    height:~"calc(100% - @{diff})";
+    width: 100%;
+    overflow: hidden;
+    flex: 1 1 0%;
+    display: flex;
+    transition: all 0.2s;
+    .contentWarp {
+        height: auto;
+        width: 100%;
+        flex-shrink: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+}
+
+.contentHidden {
+    height: 100%;
+}
+
+:global {
+    body {
+        margin: 0px;
+        padding: 0px;
+    }
+    .am-tab-bar {
+        height: 50px;
+    }
+}

@@ -1,0 +1,114 @@
+@diff: 4px;
+.formItem {
+    color: rgba(0, 0, 0, .65);
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0; // margin-bottom: 24px;
+    min-height: 48px;
+    .itemLabel {
+        padding: 0 0 8px;
+        margin: 0;
+        display: block;
+        text-align: left;
+        line-height: 1.5;
+        label {
+            color: rgba(0, 0, 0, .85);
+            position: relative;
+        }
+    }
+    .itemTip {
+        color: #f76a24;
+        font-size: 12px;
+        line-height: 1.5;
+    }
+    .odds {
+        height: 44px !important;
+        :global {
+            .ant-radio-button-wrapper {
+                text-align: center;
+                width: 25%;
+                height: 42px;
+            }
+        }
+    }
+    :global {
+        .am-slider-wrapper {
+            height: 35px;
+            margin-top: 15px;
+        }
+        .am-input-item {
+            border: 1px solid #dadde0;
+            box-sizing: border-box;
+            border-radius: 3px;
+        }
+        .ant-radio-group {
+            width: 100%;
+            height: 41px;
+            .ant-radio-wrapper {
+                width: 30%;
+                padding: 10px;
+            }
+        }
+    }
+}
+
+.antRow {
+    position: relative;
+    height: auto;
+    zoom: 1;
+    display: block
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bolder;
+    margin-bottom: 0px;
+}
+
+.priceUp {
+    color: #3fc295;
+}
+
+.priceDown {
+    color: #e14d4e;
+}
+
+.priceIncome {
+    font-size: 28px;
+    font-weight: bolder;
+    margin: 0px;
+    color: #3fc295;
+}
+
+.priceCNY {
+    margin-top: 0px;
+}
+
+:global {
+    .am-green {
+        color: #fff!important;
+        background-color: #3fc295;
+        border: 1px solid #3fc295;
+        margin-right: 4px;
+        width:~"calc(50% - @{diff})";
+        ::before {
+            border: none;
+        }
+    }
+    .am-green.am-button-active {
+        background-color: #329e79;
+    }
+    .am-red {
+        color: #fff!important;
+        background-color: #e14d4e;
+        border: 1px solid #e14d4e;
+        margin-left: 4px;
+        width:~"calc(50% - @{diff})";
+        ::before {
+            border: none;
+        }
+    }
+    .am-red.am-button-active {
+        background-color: #bd4041;
+    }
+}
