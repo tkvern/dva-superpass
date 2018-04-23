@@ -3,7 +3,7 @@ import Menus from './Menus';
 import style from './MainLayout.less';
 
 const MainLayout = ({ children, dispatch, menus }) => {
-  let { fullScreen, selectedTab, hidden } = menus;
+  let { selectedTab, hidden } = menus;
   window.addEventListener("orientationchange", function (event) {
     const orientation = window.orientation === 90 || window.orientation === -90
     dispatch({
@@ -29,7 +29,7 @@ const MainLayout = ({ children, dispatch, menus }) => {
           {children}
         </div>
       </div>
-      <Menus selectedTab={selectedTab} hidden={hidden} fullScreen={fullScreen} />
+      <Menus selectedTab={selectedTab} hidden={hidden} />
     </div>
   )
 }

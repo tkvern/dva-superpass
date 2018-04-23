@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
+import { routerRedux } from 'dva/router';
 import { List, WhiteSpace } from 'antd-mobile';
 import style from './UserPanel.less';
 import Numeral from 'numeral';
@@ -35,12 +36,16 @@ class UserPanel extends Component {
             extra={Numeral(1000000).format('0,0.00') + " CNY"}
             thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
             arrow="horizontal"
-            onClick={() => { }}
+            onClick={() => {
+              this.props.dispatch(routerRedux.push('balance'))
+            }}
           >余额</Item>
           <Item
             thumb="https://zos.alipayobjects.com/rmsportal/UmbJMbWOejVOpxe.png"
             arrow="horizontal"
-            onClick={() => { }}
+            onClick={() => {
+              this.props.dispatch(routerRedux.push('order'))
+            }}
           >订单</Item>
         </List>
         <WhiteSpace size="md" />
