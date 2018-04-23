@@ -67,7 +67,7 @@ class ExchangePanel extends PureComponent {
     script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-tickers.js';
     script.innerText = JSON.stringify(onload);
     document.getElementsByClassName('tradingview-widget-container__widget')[0].appendChild(script);
-  };
+  }
 
   render() {
     return (
