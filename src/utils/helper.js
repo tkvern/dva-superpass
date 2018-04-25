@@ -28,3 +28,7 @@ export function getCookie(c_name) {
   }
   return ""
 }
+
+export function delCookie(name) {
+  setCookie(name, "", -1);
+}

@@ -4,6 +4,7 @@ import { routerRedux } from 'dva/router';
 import { NavBar, Icon } from 'antd-mobile';
 import SingleLayout from '../components/layout/SingleLayout';
 import style from './Setting.less';
+import SettingPanel from '../components/user/SettingPanel';
 
 function Setting({ dispatch }) {
   return (
@@ -20,7 +21,7 @@ function Setting({ dispatch }) {
         }
       />
       <div className={style.content}>
-        <h1>这里是设置</h1>
+        <SettingPanel />
       </div>
     </SingleLayout>
   )
