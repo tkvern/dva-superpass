@@ -18,7 +18,7 @@ if (!global.userCollection) {
       },
       'mobile': /1(3[0-9]|4[57]|5[0-35-9]|7[01678]|8[0-9])\d{8}/,
       'avatar': () => {
-        return Random.image('125x125');
+        return Random.image('125x125', Random.color(), '#FFFFFF', 'jpg', Random.string('upper', 1));
       },
       'status|1-2': 1,
       'email': () => {
@@ -36,7 +36,11 @@ if (!global.userCollection) {
       'balance': () => {
         return Random.float(0, 99999, 2, 2);
       }
-    }]
+    }],
+    page: {
+      total: 100,
+      current: 1,
+    },
   });
 
   const data2 = mockjs.mock({
@@ -46,11 +50,11 @@ if (!global.userCollection) {
         return Random.guid()
       },
       'name': () => {
-        return Random.first();
+        return 'Vern';
       },
       'mobile': /1(3[0-9]|4[57]|5[0-35-9]|7[01678]|8[0-9])\d{8}/,
       'avatar': () => {
-        return Random.image('125x125');
+        return Random.image('125x125', Random.color(), '#FFFFFF', 'jpg', 'T');
       },
       'status|1-2': 1,
       'email': 'tkvern@qq.com',
@@ -75,11 +79,11 @@ if (!global.userCollection) {
         return Random.guid()
       },
       'name': () => {
-        return Random.first();
+        return 'Zshuang';
       },
       'mobile': /1(3[0-9]|4[57]|5[0-35-9]|7[01678]|8[0-9])\d{8}/,
       'avatar': () => {
-        return Random.image('125x125');
+        return Random.image('125x125', Random.color(), '#FFFFFF', 'jpg', 'Z');
       },
       'status|1-2': 1,
       'email': 'zshuang@qq.com',
@@ -106,6 +110,43 @@ if (!global.userCollection) {
 }
 
 module.exports = {
+  'GET /api/users'(req, res) {
+    const page = qs.parse(req.query);
+    const pageSize = page.pageSize || 10;
+    const currentPage = page.page || 1;
+
+    let data;
+    let newPage;
+
+    let newData = userCollection.row;
+    if (page.field) {
+      const d = newData.filter((item) => {
+        return item[page.filed].indexOf(page.keyword) > -1;
+      });
+
+      data = d.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
+      newPage = {
+        current: currentPage * 1,
+        total: d.length,
+      };
+    } else {
+      data = userCollection.row.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+      userCollection.page.current = currentPage * 1;
+
+      newPage = {
+        current: userCollection.page.current,
+        total: userCollection.page.total,
+      }
+    }
+    setTimeout(() => {
+      res.json({
+        success: true,
+        data: data,
+        page: newPage
+      });
+    }, 200);
+  },
   'POST /api/auth'(req, res) {
     setTimeout(() => {
       clearTimeout(this);
@@ -114,7 +155,6 @@ module.exports = {
         return item.email === email && item.password === password;
       });
       if (user.length > 0) {
-        console.log(new Date(Date.now() + 86400000));
         res.json({
           success: true,
           data: user[0],

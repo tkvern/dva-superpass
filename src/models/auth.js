@@ -1,7 +1,7 @@
 import { parse } from 'qs';
 import { Toast } from 'antd-mobile';
 import { login } from '../services/auth';
-import { setLocalStorage, getCookie, setCookie } from '../utils/helper';
+import { getLocalStorage, setLocalStorage, getCookie, setCookie } from '../utils/helper';
 import { routerRedux } from 'dva/router';
 
 export default {
@@ -9,15 +9,18 @@ export default {
   state: {
     user: {},
     isLogined: false,
-    loginfail: false,
+    loginFail: false,
     currentMenu: [],
   },
   reducers: {
     checklogin(state, action) {
       return { ...state, isLogin: action.payload.isLogin };
     },
-    loginfail(state, action) {
-      return { ...state, loginfail: action.payload.loginfail };
+    loginSuccess(state, action) {
+      return { ...state, ...action.payload, isLogined: true };
+    },
+    loginFail(state, action) {
+      return { ...state, loginFail: action.payload.loginFail };
     },
     showLoading(state) {
       return { ...state, loading: true };
@@ -32,7 +35,12 @@ export default {
       if (data && data.success) {
         setCookie('token', data.token, 1);
         setLocalStorage('user', data.data);
-        Toast.success("登录成功！", 2);
+        yield put({
+          type: 'loginSuccess',
+          payload: {
+            user: data.data,
+          }
+        });
         yield put({
           type: 'checklogin',
           payload: {
@@ -40,19 +48,32 @@ export default {
           }
         });
         yield put(routerRedux.push('/app/user'))
+        Toast.success("登录成功！", 2);
       } else {
         Toast.fail(data.err_msg, 1);
         yield put({
-          type: 'loginfail',
+          type: 'loginFail',
           payload: {
-            loginfail: true,
+            loginFail: true,
           }
         });
       }
     },
     * loginhook({ payload }, { select, call, put }) {
       const token = getCookie('token');
-      if (!token) {
+      const user = getLocalStorage('user');
+      if (token && user) {
+        yield put({
+          type: 'loginSuccess',
+          payload: {
+            user: user,
+          }
+        });
+        yield put({
+          type: 'exchange/checkCache',
+        });
+      } else {
+        localStorage.clear();
         yield put(routerRedux.push('/login'));
       }
     },

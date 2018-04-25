@@ -4,33 +4,71 @@ import { InputItem, WhiteSpace, WingBlank, Button, Toast } from 'antd-mobile';
 import { Radio } from 'antd';
 import style from './ExchangePanel.less';
 import Numeral from 'numeral';
+import { getLocalStorage, setLocalStorage } from '../../utils/helper';
 
 const RadioGroup = Radio.Group;
 const RadioButton = Radio.Button;
-
+let aggTradeSocket;
+let tickerSocket;
 class ExchangePanel extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      price: this.props.price,
+      price: 0,
       odds: 20,
       magnitude: '1%',
       expected: '0.00',
-      maxPrice: 10000,
-      hasPriceError: false
+      maxPrice: this.props.user.balance,
+      hasPriceError: false,
+      ticker_price: this.props.ticker_price,
+      ticker_percent: this.props.ticker_percent,
+      ticker_change: this.props.ticker_change,
+      ticker_direction: this.props.ticker_direction,
+      cnyusd: this.props.cnyusd
     }
   }
 
   componentDidMount = () => {
-    this.appendEmbedScript({
-      'symbols': [
-        {
-          'title': 'BTC/USD',
-          'proName': 'BITFINEX:BTCUSD'
-        },
-      ],
-      'locale': 'zh_CN'
-    });
+    const that = this;
+    aggTradeSocket = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@aggTrade");
+    tickerSocket = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@ticker");
+    aggTradeSocket.onmessage = function (evt) {
+      const ticker_cache = getLocalStorage('ticker');
+      const received_msg = JSON.parse(evt.data);
+      const diff = received_msg['p'] - that.state.ticker_price;
+      let direction = '';
+      if (diff > 0) {
+        direction = 'up';
+      } else {
+        direction = 'down'
+      };
+      that.setState({
+        ticker_price: received_msg['p'],
+        ticker_direction: direction
+      })
+      setLocalStorage('ticker', {
+        ...ticker_cache,
+        ticker_price: received_msg['p'],
+        ticker_direction: direction
+      });
+    };
+    tickerSocket.onmessage = function (evt) {
+      const ticker_cache = getLocalStorage('ticker');
+      const received_msg = JSON.parse(evt.data);
+      that.setState({
+        ticker_percent: received_msg['P'],
+        ticker_change: received_msg['p']
+      })
+      setLocalStorage('ticker', {
+        ...ticker_cache,
+        ticker_percent: received_msg['P'],
+        ticker_change: received_msg['p']
+      });
+    };
+  }
+  componentWillUnmount = () => {
+    aggTradeSocket.close();
+    tickerSocket.close();
   }
 
   sumExpected(price, odds, magnitude) {
@@ -74,11 +112,32 @@ class ExchangePanel extends PureComponent {
       <div>
         <div className={style.white}>
           <WingBlank>
-            {/*<div className={style.subTitle}>交易-BTC</div>*/}
             <WhiteSpace size="xl" />
-            <div className={`${style.formItem} ${style.antRow}`} style={{ minHeight: '72px' }}>
+            <div className={`${style.formItem} ${style.antRow}`}>
               <div className="tradingview-widget-container">
                 <div className="tradingview-widget-container__widget"></div>
+              </div>
+              <div className={style.embedWrapperBody}>
+                <div className={style.tickerContainer}>
+                  <div className={style.tickerRow}>
+                    <div className={style.tickerItem}>
+                      <div className={style.tickerItemHead}>
+                        <span className={style.tickerItemTitle}>BTC/USDT</span>
+                        <span
+                          className={`${style.tickerItemLast} ${this.state.ticker_direction === 'up' ? style.growing : style.falling}`}>
+                          ${Numeral(this.state.ticker_price).format('0,0.00')} ≈ ¥{Numeral(this.state.ticker_price * this.state.cnyusd).format('0,0.00')}
+                        </span>
+                      </div>
+                      <div className={`${style.tickerItemBody} ${style[this.state.ticker_direction]}`}>
+                        <span className={style.tickerItemChangeDirection}>
+                          {this.state.ticker_direction === 'up' ? '↑' : '↓'}
+                        </span>
+                        <span className={style.tickerItemChangePercent}>{Numeral(this.state.ticker_percent).format('0.00')}%</span>
+                        <span className={style.tickerChange}>{Numeral(this.state.ticker_change).format('0,0.00')}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <WhiteSpace size="xl" />
@@ -114,6 +173,10 @@ class ExchangePanel extends PureComponent {
                   this.sumExpected(cprice, this.state.odds, this.state.magnitude);
                 }}
               >金额</InputItem>
+              <WhiteSpace size="xs" />
+              <div className={style.itemTip}>
+                <label title="usdt">≈ ${Numeral(this.state.price / this.state.cnyusd).format('0,0.00')}</label>
+              </div>
             </div>
             <WhiteSpace size="xl" />
             <div className={`${style.formItem} ${style.antRow}`}>

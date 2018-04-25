@@ -127,3 +127,90 @@
         background-color: #bd4041;
     }
 }
+
+.embedWrapperBody {
+    border: 1px solid #dadde0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    overflow: hidden;
+    .tickerContainer {
+        display: table;
+        position: relative;
+        width: 100%;
+        height: 70px;
+        overflow-y: hidden;
+        table-layout: fixed;
+        background-color: #fff;
+        border-radius: 4px;
+        .tickerRow {
+            display: table-row;
+            .tickerItem {
+                display: table-cell;
+                position: relative;
+                padding: 10px 23px;
+                height: 50px;
+                background-clip: padding-box;
+                vertical-align: top;
+                color: #4a4a4a;
+                .tickerItemHead {
+                    display: flex;
+                    height: 20px;
+                    width: 100%;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: stretch;
+                    font-size: 12px;
+                    .tickerItemTitle {
+                        display: inline-block;
+                        flex-shrink: 1;
+                        user-select: text;
+                        cursor: pointer;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+                    .tickerItemLast {
+                        flex-grow: 1;
+                        overflow: visible;
+                        user-select: text;
+                        text-align: right;
+                        color: #4a4a4a;
+                    }
+                    .growing {
+                        color: #3cbc98
+                    }
+                    .falling {
+                        color: #ff4a68
+                    }
+                }
+                .tickerItemBody {
+                    width: 100%;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    font-size: 22px;
+                    line-height: 26px;
+                    .tickerItemChangeDirection {
+                        display: inline-block;
+                        vertical-align: top;
+                        margin: 2px 9px 0 -3px;
+                        width: 12px;
+                        height: 8px;
+                    }
+                    .tickerItemChangePercent {
+                        user-select: text;
+                    }
+                    .tickerChange {
+                        font-size: 12px;
+                        margin: 0 0 0 8px;
+                    }
+                }
+                .up {
+                    color: #3cbc98
+                }
+                .down {
+                    color: #ff4a68
+                }
+            }
+        }
+    }
+}

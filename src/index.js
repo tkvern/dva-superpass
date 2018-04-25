@@ -11,6 +11,7 @@ const app = dva();
 // app.model(require('./models/example').default);
 app.model(require('./models/menus').default);
 app.model(require('./models/auth').default);
+app.model(require('./models/exchange').default);
 
 
 // 4. Router

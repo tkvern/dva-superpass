@@ -28,6 +28,7 @@ class SettingPanel extends Component {
         {
           text: '确认', onPress: () => {
             delCookie('token');
+            localStorage.clear();
             this.props.dispatch(routerRedux.push('/login'));
           }
         },

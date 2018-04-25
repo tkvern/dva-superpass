@@ -6,7 +6,11 @@ import MainLayout from '../components/layout/MainLayout';
 import UserPanel from '../components/user/UserPanel';
 import style from './User.less';
 
-function User({ dispatch }) {
+function User({ dispatch, auth }) {
+  const { user } = auth;
+  const userPanelProps = {
+    user: user
+  }
   return (
     <MainLayout>
       <NavBar
@@ -20,9 +24,12 @@ function User({ dispatch }) {
           }}>设置</label>
         }
       ></NavBar>
-      <UserPanel />
+      <UserPanel {...userPanelProps} />
     </MainLayout>
   );
 }
 
-export default connect()(User);
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+export default connect(mapStateToProps)(User);

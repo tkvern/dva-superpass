@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { routerRedux } from 'dva/router';
+// import { routerRedux } from 'dva/router';
 import { NavBar } from 'antd-mobile';
 import SingleLayout from '../components/layout/SingleLayout';
 import LoginPanel from '../components/login/LoginPanel';
@@ -20,12 +20,7 @@ function Login({ dispatch, auth }) {
       <NavBar
         className={style.navbarFixed}
         mode="light"
-        rightContent={
-          <label onClick={() => {
-            dispatch(routerRedux.push('register'));
-          }}>注册</label>
-        }
-      />
+      >登录</NavBar>
       <div className={style.content}>
         <LoginPanel
           {...loginPanelProps}

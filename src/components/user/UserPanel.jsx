@@ -22,15 +22,18 @@ class UserPanel extends Component {
         <Item
           className={style.userinfo}
           arrow="empty"
+          thumb={
+            <img className={style.avatar} alt="avatar" src={this.props.user.avatar} style={{ width: '60px', height: '60px' }} />
+          }
           onClick={() => { }}
         >
-          Vern<Brief>tkvern@qq.com</Brief>
+          {this.props.user.name}<Brief>{this.props.user.email}</Brief>
         </Item>
         <WhiteSpace size="md" />
         <List>
           <Item
             className={style.balance}
-            extra={Numeral(1000000).format('0,0.00') + " CNY"}
+            extra={Numeral(this.props.user.balance).format('0,0.00') + " CNY"}
             thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
             arrow="horizontal"
             onClick={() => {
@@ -55,7 +58,7 @@ class UserPanel extends Component {
             arrow="horizontal"
             onClick={() => { }}
           >关于</Item>
-          <img alt="tst" src="/11524478118_.pic_hd.jpg" width="100%" />
+          {/*<img alt="tst" src="/11524478118_.pic_hd.jpg" width="100%" />*/}
         </List>
       </div>);
   }
