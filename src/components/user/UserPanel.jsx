@@ -22,9 +22,6 @@ class UserPanel extends Component {
         <Item
           className={style.userinfo}
           arrow="empty"
-          thumb={
-            <img className={style.avatar} src="https://avatars0.githubusercontent.com/u/10667077?s=460&v=4" alt="avatar" style={{ height: '60px', width: '60px' }} />
-          }
           onClick={() => { }}
         >
           Vern<Brief>tkvern@qq.com</Brief>
@@ -58,6 +55,7 @@ class UserPanel extends Component {
             arrow="horizontal"
             onClick={() => { }}
           >关于</Item>
+          <img alt="tst" src="/11524478118_.pic_hd.jpg" width="100%" />
         </List>
       </div>);
   }

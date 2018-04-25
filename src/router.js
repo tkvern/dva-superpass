@@ -6,18 +6,20 @@ import User from './routes/User';
 import Setting from './routes/Setting';
 import Order from './routes/Order';
 import Balance from './routes/Balance';
+import Login from './routes/Login';
 
 function RouterConfig({ history }) {
   return (
     <Router history={history}>
       <Switch>
-        <Route path="/" exact component={Exchange} />
-        <Route path="/exchange" exact component={Exchange} />
-        <Route path="/kline" exact component={Kline} />
-        <Route path="/user" exact component={User} />
-        <Route path="/setting" exact component={Setting} />
-        <Route path="/order" exact component={Order} />
-        <Route path="/balance" exact component={Balance} />
+        <Route path="/" exact component={Login} />
+        <Route path="/app/exchange" exact component={Exchange} />
+        <Route path="/app/kline" exact component={Kline} />
+        <Route path="/app/user" exact component={User} />
+        <Route path="/app/setting" exact component={Setting} />
+        <Route path="/app/order" exact component={Order} />
+        <Route path="/app/balance" exact component={Balance} />
+        <Route path="/login" exact component={Login} />
       </Switch>
     </Router>
   );

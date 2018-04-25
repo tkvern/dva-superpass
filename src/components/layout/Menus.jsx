@@ -13,15 +13,11 @@ class Menus extends Component {
     }
   }
 
-  componentWillUpdate() {
-    // console.log(this.state);
-  }
-
   handleSelectedTabSwitch(key) {
     if (key === this.state.selectedTab) {
       return;
     }
-    this.props.dispatch(routerRedux.push(key))
+    this.props.dispatch(routerRedux.push('/app/' + key))
     this.props.dispatch({
       type: 'menus/selectedTabSwitch',
       payload: {

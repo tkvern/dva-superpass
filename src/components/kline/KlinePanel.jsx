@@ -4,10 +4,6 @@ import { NoticeBar } from 'antd-mobile';
 import TradingViewWidget, { Themes } from 'react-tradingview-widget';
 
 class KlinePanel extends Component {
-  componentWillUnmount = () => {
-    // document.getElementsByClassName('tradingview-widget-container__widget')[0].innerHTML = "";
-    console.log(document.getElementsByClassName('tradingview-widget-container__widget')[0]);
-  }
   render() {
     return (
       <div style={{ height: '100%', minHeight: '480px' }}>

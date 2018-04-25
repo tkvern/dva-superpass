@@ -28,6 +28,7 @@
         "husky": "^0.12.0",
         "less": "^2.7.2",
         "less-loader": "^4.0.5",
+        "mockjs": "^1.0.1-beta3",
         "redbox-react": "^1.4.3",
         "roadhog": "^2.0.0",
         "style-loader": "^0.20.3"
