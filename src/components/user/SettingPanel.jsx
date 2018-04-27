@@ -34,8 +34,22 @@ class SettingPanel extends Component {
         },
       ]);
     };
+    const showClear = () => {
+      Alert('提示', '确认清空当前缓存吗?', [
+        { text: '取消', onPress: () => { } },
+        {
+          text: '确认', onPress: () => {
+            localStorage.removeItem('ticker');
+            localStorage.removeItem('currentOrders');
+            localStorage.removeItem('rates');
+          }
+        },
+      ]);
+    };
     return (
       <div className={style.content}>
+        <WhiteSpace size="md" />
+        <Button onClick={showClear}>清空缓存</Button>
         <WhiteSpace size="md" />
         <Button onClick={showAlert}>退出登录</Button>
       </div>

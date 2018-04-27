@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { routerRedux } from 'dva/router';
-import { List, WhiteSpace } from 'antd-mobile';
+// import { routerRedux } from 'dva/router';
+import { List, WhiteSpace, Toast } from 'antd-mobile';
 import style from './UserPanel.less';
 import Numeral from 'numeral';
 
@@ -37,14 +37,16 @@ class UserPanel extends Component {
             thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
             arrow="horizontal"
             onClick={() => {
-              this.props.dispatch(routerRedux.push('balance'))
+              Toast.info("正在施工！", 1)
+              // this.props.dispatch(routerRedux.push('balance'))
             }}
           >余额</Item>
           <Item
             thumb="https://zos.alipayobjects.com/rmsportal/UmbJMbWOejVOpxe.png"
             arrow="horizontal"
             onClick={() => {
-              this.props.dispatch(routerRedux.push('order'))
+              Toast.info("正在施工！", 1)
+              // this.props.dispatch(routerRedux.push('order'))
             }}
           >订单</Item>
         </List>
@@ -52,11 +54,11 @@ class UserPanel extends Component {
         <List>
           <Item
             arrow="horizontal"
-            onClick={() => { }}
+            onClick={() => { Toast.info("正在施工！", 1) }}
           >邀请</Item>
           <Item
             arrow="horizontal"
-            onClick={() => { }}
+            onClick={() => { Toast.info("正在施工！", 1) }}
           >关于</Item>
           {/*<img alt="tst" src="/11524478118_.pic_hd.jpg" width="100%" />*/}
         </List>

@@ -36,7 +36,7 @@ if (global.userCollection) {
 
 if (!global.orderCollection) {
   let orders = mockjs.mock({
-    'row|1000': [{
+    'row|100': [{
       'id|+1': 1,
       'user_id': () => {
         return Random.natural(1, 100);
@@ -63,7 +63,7 @@ if (!global.orderCollection) {
         return Random.status();
       },
       'ticker_price': () => {
-        return Random.float(6800, 9500, 2, 2);
+        return Random.float(9200, 9500, 2, 2);
       },
       'rate': 6.3057,
     }],

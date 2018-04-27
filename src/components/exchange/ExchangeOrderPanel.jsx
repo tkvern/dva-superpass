@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'dva/router';
+// import { Link } from 'dva/router';
 import { connect } from 'dva';
 import style from './ExchangePanel.less';
 import styleo from './ExchangeOrderPanel.less';
-import { WingBlank, WhiteSpace, Flex } from 'antd-mobile';
+import { WingBlank, WhiteSpace, Flex, Toast } from 'antd-mobile';
 import { Divider } from 'antd';
 import moment from 'moment';
 import Numeral from 'numeral';
@@ -39,7 +39,7 @@ class ExchangeOrderPanel extends Component {
     if (magnitude === 1 || magnitude === 2 || magnitude === 5) {
       result = ((ticker_price - old_ticker_price) / old_ticker_price) * odds * price * magnitude;
     } else if (magnitude === 4 || magnitude === 10 || magnitude === 24) {
-      result = (ticker_price - old_ticker_price) * odds * rate;
+      result = (ticker_price - old_ticker_price) * odds * rate * ((price / rate) / old_ticker_price);
     }
     if (direction === 'down') {
       result = -result;
@@ -85,7 +85,8 @@ class ExchangeOrderPanel extends Component {
                 <h2>当前订单</h2>
               </Flex.Item>
               <Flex.Item style={{ textAlign: 'right' }}>
-                <Link to="/app/order">全部</Link>
+                {/*<Link to="/app/order">全部</Link>*/}
+                <span onClick={() => { Toast.info("正在施工！", 1) }}>全部</span>
               </Flex.Item>
             </Flex>
           </div>

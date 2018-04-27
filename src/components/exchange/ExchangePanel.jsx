@@ -283,6 +283,9 @@ class ExchangePanel extends PureComponent {
                 inline
                 disabled={this.state.disabled}
               >买跌</Button>
+              <div className={style.itemTip}>
+                <label title="tip" style={{ color: '#9db2bd' }}>AI推荐指数 <br /><span className={style.zh}>涨:13</span>   <span className={style.zo}>中立:10</span>   <span className={style.di}>跌:1</span></label>
+              </div>
             </div>
             <WhiteSpace size="xl" />
           </WingBlank>
