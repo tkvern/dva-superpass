@@ -25,6 +25,7 @@ class ExchangePanel extends PureComponent {
       ticker_percent: this.props.ticker_percent,
       ticker_change: this.props.ticker_change,
       ticker_direction: this.props.ticker_direction,
+      ticker_24direction: this.props.ticker_24direction,
       cnyusd: this.props.cnyusd,
       disabled: !!this.props.disabled,
       user: this.props.user,
@@ -59,14 +60,22 @@ class ExchangePanel extends PureComponent {
     tickerSocket.onmessage = function (evt) {
       const ticker_cache = getLocalStorage('ticker');
       const received_msg = JSON.parse(evt.data);
+      let ticker_24direction = '';
+      if (received_msg['P'] >= 0) {
+        ticker_24direction = 'up'
+      } else {
+        ticker_24direction = 'down'
+      };
       that.setState({
         ticker_percent: received_msg['P'],
-        ticker_change: received_msg['p']
+        ticker_change: received_msg['p'],
+        ticker_24direction: ticker_24direction
       })
       setLocalStorage('ticker', {
         ...ticker_cache,
         ticker_percent: received_msg['P'],
-        ticker_change: received_msg['p']
+        ticker_change: received_msg['p'],
+        ticker_24direction: ticker_24direction
       });
     };
   }
@@ -167,9 +176,9 @@ class ExchangePanel extends PureComponent {
                           ${Numeral(this.state.ticker_price).format('0,0.00')} ≈ ¥{Numeral(this.state.ticker_price * this.state.cnyusd).format('0,0.00')}
                         </span>
                       </div>
-                      <div className={`${style.tickerItemBody} ${style[this.state.ticker_direction]}`}>
+                      <div className={`${style.tickerItemBody} ${style[this.state.ticker_24direction]}`}>
                         <span className={style.tickerItemChangeDirection}>
-                          {this.state.ticker_direction === 'up' ? '↑' : '↓'}
+                          {this.state.ticker_24direction === 'up' ? '↑' : '↓'}
                         </span>
                         <span className={style.tickerItemChangePercent}>{Numeral(this.state.ticker_percent).format('0.00')}%</span>
                         <span className={style.tickerChange}>{Numeral(this.state.ticker_change).format('0,0.00')}</span>

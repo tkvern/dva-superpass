@@ -12,6 +12,7 @@ function Exchange({ auth, exchange }) {
     ticker_percent,
     ticker_change,
     ticker_direction,
+    ticker_24direction,
     cnyusd,
     currentOrders
   } = exchange;
@@ -21,6 +22,7 @@ function Exchange({ auth, exchange }) {
     ticker_percent: ticker_percent,
     ticker_change: ticker_change,
     ticker_direction: ticker_direction,
+    ticker_24direction: ticker_24direction,
     cnyusd: cnyusd,
     currentOrders: currentOrders
   }

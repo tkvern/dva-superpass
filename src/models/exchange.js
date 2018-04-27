@@ -9,6 +9,7 @@ export default {
     ticker_percent: 0.00,
     ticker_change: 0,
     ticker_direction: '',
+    ticker_24direction: '',
     cnyusd: 0,
     currentOrders: [],
   },
