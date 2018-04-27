@@ -36,7 +36,7 @@ if (global.userCollection) {
 
 if (!global.orderCollection) {
   let orders = mockjs.mock({
-    'row|100': [{
+    'row|10': [{
       'id|+1': 1,
       'user_id': () => {
         return Random.natural(1, 100);
