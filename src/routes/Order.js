@@ -12,7 +12,7 @@ function Order({ dispatch }) {
         className={style.navbarFixed}
         mode="light"
         onLeftClick={() => {
-          dispatch(routerRedux.push('user'))
+          dispatch(routerRedux.goBack())
         }}
         leftContent={
           [<Icon type="left" key="1" />,

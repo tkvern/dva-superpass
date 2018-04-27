@@ -5,6 +5,7 @@ import { Radio } from 'antd';
 import style from './ExchangePanel.less';
 import Numeral from 'numeral';
 import { getLocalStorage, setLocalStorage } from '../../utils/helper';
+import ExchangeOrderPanel from './ExchangeOrderPanel';
 
 const RadioGroup = Radio.Group;
 const RadioButton = Radio.Button;
@@ -16,7 +17,7 @@ class ExchangePanel extends PureComponent {
     this.state = {
       price: 0,
       odds: 20,
-      magnitude: '1%',
+      magnitude: '1',
       expected: '0.00',
       maxPrice: this.props.user.balance,
       hasPriceError: false,
@@ -24,7 +25,10 @@ class ExchangePanel extends PureComponent {
       ticker_percent: this.props.ticker_percent,
       ticker_change: this.props.ticker_change,
       ticker_direction: this.props.ticker_direction,
-      cnyusd: this.props.cnyusd
+      cnyusd: this.props.cnyusd,
+      disabled: !!this.props.disabled,
+      user: this.props.user,
+      currentOrders: this.props.currentOrders
     }
   }
 
@@ -74,22 +78,22 @@ class ExchangePanel extends PureComponent {
   sumExpected(price, odds, magnitude) {
     let expected;
     switch (magnitude) {
-      case "1%":
+      case "1":
         expected = price * odds * 0.01;
         break;
-      case "2%":
+      case "2":
         expected = price * odds * 0.02;
         break;
-      case "5%":
+      case "5":
         expected = price * odds * 0.05;
         break;
-      case "4h":
+      case "4":
         expected = price * odds * 0.01;
         break;
-      case "10h":
+      case "10":
         expected = price * odds * 0.01;
         break;
-      case "24h":
+      case "24":
         expected = price * odds * 0.01;
         break;
       default: ;
@@ -97,14 +101,49 @@ class ExchangePanel extends PureComponent {
     return this.setState({ expected: Numeral(expected).format('0,0.00') });
   }
 
-  appendEmbedScript = (onload) => {
-    const script = document.createElement('script');
-    script.id = 'embed-widget-tickers-script';
-    script.type = 'text/javascript';
-    script.async = true;
-    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-tickers.js';
-    script.innerText = JSON.stringify(onload);
-    document.getElementsByClassName('tradingview-widget-container__widget')[0].appendChild(script);
+  onSubmit = (direction) => {
+    Toast.loading('Loading...', 2);
+    this.setState({
+      disabled: true
+    })
+    const { price, odds, magnitude, maxPrice, cnyusd, ticker_price } = this.state;
+    let user = this.state.user;
+    if (price > maxPrice || price < 100) {
+      this.setState({
+        disabled: false,
+      });
+      return Toast.fail((<span>请输入正确的金额<br />最低100 CNY</span>), 1);
+    }
+    this.props.dispatch({
+      type: 'exchange/create',
+      payload: {
+        price: price,
+        odds: odds,
+        magnitude: magnitude,
+        rate: cnyusd,
+        ticker_price: ticker_price,
+        user_id: user.id,
+        direction: direction
+      }
+    })
+    user.balance = user.balance - price;
+    setLocalStorage('user', user);
+    setTimeout(() => {
+      clearTimeout(this);
+      Toast.success("下单成功！", 1);
+      const currentOrders = getLocalStorage('currentOrders');
+      this.setState({
+        disabled: false,
+        price: 0,
+        odds: 20,
+        magnitude: '1',
+        expected: '0.00',
+        currentOrders: currentOrders,
+        user: user,
+        maxPrice: user.balance
+      })
+    }, 2000);
+
   }
 
   render() {
@@ -190,7 +229,6 @@ class ExchangePanel extends PureComponent {
                 <RadioButton value="10">10</RadioButton>
                 <RadioButton value="20">20</RadioButton>
                 <RadioButton value="50">50</RadioButton>
-                <RadioButton value="100">100</RadioButton>
               </RadioGroup>
               <WhiteSpace size="xs" />
               <div className={style.itemTip}>
@@ -205,14 +243,14 @@ class ExchangePanel extends PureComponent {
               <RadioGroup name="magnitude" onChange={(e) => {
                 this.setState({ magnitude: e.target.value });
                 this.sumExpected(this.state.price, this.state.odds, e.target.value);
-              }} defaultValue="1%">
-                <Radio value="1%">1%</Radio>
-                <Radio value="2%">2%</Radio>
-                <Radio value="5%">5%</Radio>
+              }} defaultValue="1">
+                <Radio value="1">1%</Radio>
+                <Radio value="2">2%</Radio>
+                <Radio value="5">5%</Radio>
                 <br />
-                <Radio value="4h">4小时</Radio>
-                <Radio value="10h">10小时</Radio>
-                <Radio value="24h">24小时</Radio>
+                <Radio value="4">4小时</Radio>
+                <Radio value="10">10小时</Radio>
+                <Radio value="24">24小时</Radio>
               </RadioGroup>
             </div>
             <WhiteSpace size="xl" />
@@ -226,22 +264,36 @@ class ExchangePanel extends PureComponent {
               </div>
             </div>
             <WhiteSpace size="xl" />
-            <div className={`${style.formItem} ${style.antRow}`}>
-              <Button className="am-green" type="default" inline>买涨</Button>
-              <Button className="am-red" type="default" inline>买跌</Button>
+            <div className={`${style.formItem} ${style.antRow}`} style={{ textAlign: 'center' }}>
+              <Button
+                className="am-green"
+                type="default"
+                onClick={() => {
+                  this.onSubmit('up');
+                }}
+                inline
+                disabled={this.state.disabled}
+              >买涨</Button>
+              <Button
+                className="am-red"
+                type="default"
+                onClick={() => {
+                  this.onSubmit('down');
+                }}
+                inline
+                disabled={this.state.disabled}
+              >买跌</Button>
             </div>
             <WhiteSpace size="xl" />
           </WingBlank>
         </div>
         <WhiteSpace size="md" />
         <div className={style.white}>
-          <WingBlank>
-            <WhiteSpace size="xl" />
-            <div className={`${style.formItem} ${style.antRow}`}>
-              <h3>当前订单</h3>
-            </div>
-            <WhiteSpace size="xl" />
-          </WingBlank>
+          <ExchangeOrderPanel
+            user={this.state.user}
+            currentOrders={this.state.currentOrders}
+            ticker_price={this.state.ticker_price}
+          />
         </div>
       </div>
     );

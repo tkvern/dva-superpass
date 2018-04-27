@@ -7,7 +7,7 @@ const Random = mockjs.Random;
 let userCollection = {};
 
 if (!global.userCollection) {
-  let data = mockjs.mock({
+  let users = mockjs.mock({
     'row|98': [{
       'id|+1': 1,
       'uuid': () => {
@@ -43,7 +43,7 @@ if (!global.userCollection) {
     },
   });
 
-  const data2 = mockjs.mock({
+  const user2 = mockjs.mock({
     'row|1': [{
       'id|+1': 99,
       'uuid': () => {
@@ -72,7 +72,7 @@ if (!global.userCollection) {
       }
     }]
   });
-  const data3 = mockjs.mock({
+  const user3 = mockjs.mock({
     'row|1': [{
       'id|+1': 100,
       'uuid': () => {
@@ -101,9 +101,9 @@ if (!global.userCollection) {
       }
     }]
   });
-  data.row.push(data2.row);
-  data.row.push(data3.row);
-  userCollection = data;
+  users.row.push(user2.row);
+  users.row.push(user3.row);
+  userCollection = users;
   global.userCollection = userCollection;
 } else {
   userCollection = global.userCollection;
@@ -148,12 +148,12 @@ module.exports = {
     }, 200);
   },
   'POST /api/auth'(req, res) {
+    const { email, password } = qs.parse(req.body);
+    const user = userCollection.row.filter((item) => {
+      return item.email === email && item.password === password;
+    });
     setTimeout(() => {
       clearTimeout(this);
-      const { email, password } = qs.parse(req.body);
-      const user = userCollection.row.filter((item) => {
-        return item.email === email && item.password === password;
-      });
       if (user.length > 0) {
         res.json({
           success: true,

@@ -12,7 +12,8 @@ function Exchange({ auth, exchange }) {
     ticker_percent,
     ticker_change,
     ticker_direction,
-    cnyusd
+    cnyusd,
+    currentOrders
   } = exchange;
   const exchangePanelProps = {
     user: user,
@@ -20,7 +21,8 @@ function Exchange({ auth, exchange }) {
     ticker_percent: ticker_percent,
     ticker_change: ticker_change,
     ticker_direction: ticker_direction,
-    cnyusd: cnyusd
+    cnyusd: cnyusd,
+    currentOrders: currentOrders
   }
   return (
     <MainLayout>
