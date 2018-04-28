@@ -37,7 +37,7 @@ class ExchangeOrderPanel extends Component {
     let result = 0;
     magnitude = parseInt(magnitude, 10);
     if (magnitude === 1 || magnitude === 2 || magnitude === 5) {
-      result = ((ticker_price - old_ticker_price) / old_ticker_price) * odds * price * magnitude;
+      result = ((ticker_price - old_ticker_price) / old_ticker_price) * odds * price;
     } else if (magnitude === 4 || magnitude === 10 || magnitude === 24) {
       result = (ticker_price - old_ticker_price) * odds * rate * ((price / rate) / old_ticker_price);
     }
