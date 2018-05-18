@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 // import { routerRedux } from 'dva/router';
-import { List, SwipeAction } from 'antd-mobile';
+import { List, SwipeAction, WhiteSpace, Button } from 'antd-mobile';
 // import { delCookie } from '../../utils/helper';
 import style from './MessageSubscriptionPanel.less';
 // import { getScoresType } from '../../utils/helper';
@@ -79,6 +79,7 @@ class MessageSubscriptionPanel extends Component {
     return (
       <div className={style.content}>
         <div className="am-list-header">
+          <h4>订阅状态:<span className={`${style.breatheBtn} ${'green'}`}>推送中...</span></h4>
           <span>Tip:左滑列表查看菜单</span>
         </div>
         <List>
@@ -105,7 +106,7 @@ class MessageSubscriptionPanel extends Component {
               multipleLine
               arrow="horizontal"
               onClick={() => console.log('List.Item clicked!')}
-            >BTC<Brief>5分钟</Brief>
+            >BTC<Brief>频率: 5分钟</Brief>
             </Item>
           </SwipeAction>
           <SwipeAction
@@ -129,10 +130,21 @@ class MessageSubscriptionPanel extends Component {
               multipleLine
               arrow="horizontal"
               onClick={() => console.log('List.Item clicked!')}
-            >ETH<Brief>5分钟</Brief>
+            >ETH<Brief>频率: 60分钟</Brief>
             </Item>
           </SwipeAction>
         </List>
+        <WhiteSpace size="md" />
+        <div className={style.itemTip}>
+          <label title="tip">可以向机器人发送开始/暂停指令</label>
+        </div>
+        <WhiteSpace size="md" />
+        <Button>开始/暂停(全部)</Button>
+        <WhiteSpace size="md" />
+        <Button><i className="iconfont" style={{
+          color: 'rgb(51, 163, 244)',
+          fontSize: '17px'
+        }}>&#xe600;</i>  添加币种</Button>
       </div>
     );
   }

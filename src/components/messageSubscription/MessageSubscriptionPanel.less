@@ -1,3 +1,46 @@
 .content {
     padding-top: 45px;
+    :global {
+        .am-button {
+            font-size: 17px;
+            border-radius: 0px;
+        }
+        .am-button::before {
+            border-radius: 0px !important;
+            border-left: none !important;
+            border-right: none !important;
+        }
+    }
+    .itemTip {
+        color: #f76a24;
+        font-size: 12px;
+        line-height: 1.5;
+        .di {
+            color: #e14d4e;
+        }
+        .zo {
+            color: #9db2bd;
+        }
+        .zh {
+            color: #3fc295;
+        }
+    }
+    .breatheBtn {
+      animation-timing-function: ease-in-out;
+      animation-name: breathe;
+      animation-duration: 2000ms;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+}
+
+:global {
+    @keyframes breathe {
+        0% {
+            opacity: .4;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
 }
