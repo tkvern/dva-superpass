@@ -16,7 +16,7 @@ function User({ dispatch, auth }) {
       <NavBar
         className={style.navbarFixed}
         mode="dark"
-        leftContent=""
+        leftContent="我的"
         onLeftClick={() => console.log('onLeftClick')}
         rightContent={
           <label onClick={() => {

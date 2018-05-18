@@ -3,9 +3,10 @@ import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
 import { NavBar, Icon } from 'antd-mobile';
 import SingleLayout from '../components/layout/SingleLayout';
-import style from './Blance.less';
+import BalancePanle from '../components/balance/BalancePanel';
+import style from './Balance.less';
 
-function Blance({ dispatch }) {
+function Balance({ dispatch }) {
   return (
     <SingleLayout>
       <NavBar
@@ -19,11 +20,9 @@ function Blance({ dispatch }) {
           <label key="2" style={{ color: "#000" }}>余额</label>]
         }
       />
-      <div className={style.content}>
-        <h1>这里是余额</h1>
-      </div>
+      <BalancePanle />
     </SingleLayout>
   )
 }
 
-export default connect()(Blance);
+export default connect()(Balance);

@@ -35,23 +35,24 @@ class Menus extends Component {
         noRenderContent={true}
       >
         <TabBar.Item
+          // icon={
+          //   <div style={{
+          //     width: '22px',
+          //     height: '22px',
+          //     background: 'url(https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg) center center /  21px 21px no-repeat'
+          //   }}
+          //   />
+          // }
           icon={
-            <div style={{
-              width: '22px',
-              height: '22px',
-              background: 'url(https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg) center center /  21px 21px no-repeat'
-            }}
-            />
+            <i className="iconfont">&#xe607;</i>
           }
           selectedIcon={
-            <div style={{
-              width: '22px',
-              height: '22px',
-              background: 'url(https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg) center center /  21px 21px no-repeat'
-            }}
-            />
+            <i className="iconfont"
+            style={{
+              color: 'rgb(51, 163, 244)'
+            }}>&#xe607;</i>
           }
-          title="交易"
+          title="活动"
           key="exchange"
           dot
           selected={this.state.selectedTab === 'exchange'}
@@ -61,32 +62,49 @@ class Menus extends Component {
         />
         <TabBar.Item
           icon={
-            <div style={{
-              width: '22px',
-              height: '22px',
-              background: 'url(https://gw.alipayobjects.com/zos/rmsportal/BTSsmHkPsQSPTktcXyTV.svg) center center /  21px 21px no-repeat'
-            }}
-            />
+            <i className="iconfont">&#xe60c;</i>
           }
           selectedIcon={
-            <div style={{
-              width: '22px',
-              height: '22px',
-              background: 'url(https://gw.alipayobjects.com/zos/rmsportal/ekLecvKBnRazVLXbWOnE.svg) center center /  21px 21px no-repeat'
-            }}
-            />
+            <i className="iconfont"
+            style={{
+              color: 'rgb(51, 163, 244)'
+            }}>&#xe60c;</i>
+          }
+          title="排行"
+          key="leaderboard"
+          selected={this.state.selectedTab === 'leaderboard'}
+          onPress={() => {
+            // this.handleSelectedTabSwitch('kline');
+          }}
+        />
+        <TabBar.Item
+          icon={
+            <i className="iconfont">&#xe63f;</i>
+          }
+          selectedIcon={
+            <i className="iconfont"
+            style={{
+              color: 'rgb(51, 163, 244)'
+            }}>&#xe63f;</i>
           }
           title="行情"
           key="kline"
-          badge={'new'}
+          dot
           selected={this.state.selectedTab === 'kline'}
           onPress={() => {
             this.handleSelectedTabSwitch('kline');
           }}
         />
         <TabBar.Item
-          icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg' }}
-          selectedIcon={{ uri: 'https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg' }}
+          icon={
+            <i className="iconfont">&#xe626;</i>
+          }
+          selectedIcon={
+            <i className="iconfont"
+            style={{
+              color: 'rgb(51, 163, 244)'
+            }}>&#xe626;</i>
+          }
           title="我的"
           key="user"
           selected={this.state.selectedTab === 'user'}

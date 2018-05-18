@@ -32,3 +32,37 @@ export function getCookie(c_name) {
 export function delCookie(name) {
   setCookie(name, "", -1);
 }
+
+export function getScoresType(type) {
+  let data = {};
+  switch (type) {
+    case '1':
+      data['text'] = '充值';
+      data['direction'] = true;
+      break;
+    case '2':
+      data['text'] = '赠送';
+      data['direction'] = true;
+      break;
+    case '3':
+      data['text'] = '盈利';
+      data['direction'] = true;
+      break;
+    case '4':
+      data['text'] = '下注';
+      data['direction'] = false;
+      break;
+    case '5':
+      data['text'] = '兑换';
+      data['direction'] = false;
+      break;
+    case '6':
+      data['text'] = '签到';
+      data['direction'] = true;
+      break;
+    default:
+      data['text'] = 'unknown';
+      data['direction'] = undefined;
+  }
+  return data;
+}

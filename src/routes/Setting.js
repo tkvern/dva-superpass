@@ -20,9 +20,7 @@ function Setting({ dispatch }) {
           <label key="2" style={{ color: "#000" }}>设置</label>]
         }
       />
-      <div className={style.content}>
-        <SettingPanel />
-      </div>
+      <SettingPanel />
     </SingleLayout>
   )
 }

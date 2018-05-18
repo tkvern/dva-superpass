@@ -74,9 +74,22 @@ export default {
         });
       } else {
         localStorage.clear();
+        yield put({
+          type: 'checklogin',
+          payload: {
+            isLogined: false,
+          }
+        });
         yield put(routerRedux.push('/login'));
       }
     },
+    * redirect({ payload }, { select, call, put }) {
+      const token = getCookie('token');
+      const user = getLocalStorage('user');
+      if (token && user) {
+        yield put(routerRedux.push('/app/user'));
+      }
+    }
   },
   subscriptions: {
     setup({ dispatch, history }) {
@@ -84,6 +97,10 @@ export default {
         if (location.pathname.includes('app')) {
           dispatch({
             type: 'loginhook',
+          });
+        } else {
+          dispatch({
+            type: 'redirect',
           });
         }
       });

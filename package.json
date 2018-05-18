@@ -7,10 +7,10 @@
         "precommit": "npm run lint"
     },
     "dependencies": {
-        "antd": "^3.4.1",
+        "antd": "^3.5.1",
         "antd-mobile": "^2.1.8",
         "babel-plugin-import": "^1.7.0",
-        "dva": "^2.2.2",
+        "dva": "^2.2.3",
         "moment": "^2.22.1",
         "numeral": "^2.0.6",
         "react": "^16.2.0",
@@ -22,7 +22,7 @@
         "css-loader": "^0.28.11",
         "eslint": "^4.14.0",
         "eslint-config-umi": "^0.1.1",
-        "eslint-plugin-flowtype": "^2.34.1",
+        "eslint-plugin-flowtype": "^2.46.3",
         "eslint-plugin-import": "^2.6.0",
         "eslint-plugin-jsx-a11y": "^5.1.1",
         "eslint-plugin-react": "^7.1.0",
@@ -30,7 +30,7 @@
         "less": "^2.7.2",
         "less-loader": "^4.0.5",
         "mockjs": "^1.0.1-beta3",
-        "redbox-react": "^1.4.3",
+        "redbox-react": "^1.6.0",
         "roadhog": "^2.0.0",
         "style-loader": "^0.20.3"
     }
