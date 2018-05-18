@@ -7,6 +7,7 @@ import Setting from './routes/Setting';
 import Order from './routes/Order';
 import Balance from './routes/Balance';
 import Login from './routes/Login';
+import MessageSubscription from './routes/MessageSubscription';
 
 function RouterConfig({ history }) {
   return (
@@ -19,6 +20,7 @@ function RouterConfig({ history }) {
         <Route path="/app/setting" exact component={Setting} />
         <Route path="/app/order" exact component={Order} />
         <Route path="/app/balance" exact component={Balance} />
+        <Route path="/app/message_subscription" exact component={MessageSubscription} />
         <Route path="/login" exact component={Login} />
       </Switch>
     </Router>

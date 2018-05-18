@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'dva';
-// import { routerRedux } from 'dva/router';
-import { PullToRefresh, List, ListView } from 'antd-mobile';
-// import { delCookie } from '../../utils/helper';
+import { List, ListView } from 'antd-mobile';
 import style from './BalancePanel.less';
 import { getScoresType } from '../../utils/helper';
 
 const Item = List.Item;
 const Brief = Item.Brief;
-const NUM_ROWS = 10;
 let pageIndex = 0
 
 const data = [
@@ -90,7 +87,6 @@ class BalancePanel extends Component {
       data: [],
       dataSource,
       isLoading: true,
-      height: document.documentElement.clientHeight,
       useBodyScroll: false,
     }
   }
@@ -142,7 +138,7 @@ class BalancePanel extends Component {
     if (this.state.isLoading && !this.state.hasMore) {
       return;
     }
-    console.log('reach end', event);
+    // console.log('reach end', event);
     this.setState({ isLoading: true });
     setTimeout(() => {
       this.rData = [...this.rData, ...genData(++pageIndex)];
@@ -185,7 +181,7 @@ class BalancePanel extends Component {
             overflow: 'auto',
           }}
           pageSize={10}
-          onScroll={() => { console.log('scroll'); }}
+          onScroll={() => { }}
           scrollRenderAheadDistance={500}
           onEndReached={this.onEndReached}
           onEndReachedThreshold={10}

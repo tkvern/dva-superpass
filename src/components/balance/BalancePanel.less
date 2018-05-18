@@ -1,6 +1,6 @@
 .extra {
     font-size: 20px;
-    color: #000;
+    color: rgba(0, 0, 0, .85);
 } // .red {
 //   color: #e14d4e;
 // }
@@ -19,6 +19,10 @@
     :global {
         .am-list-content {
             font-weight: 600;
+            color: rgba(0, 0, 0, .85)!important;
+        }
+        .am-list-body::before {
+          height: 0px!important;
         }
     }
 }

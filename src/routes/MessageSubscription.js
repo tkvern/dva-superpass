@@ -3,10 +3,10 @@ import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
 import { NavBar, Icon } from 'antd-mobile';
 import SingleLayout from '../components/layout/SingleLayout';
-import BalancePanle from '../components/balance/BalancePanel';
-import style from './Balance.less';
+import MessageSubscriptionPanel from '../components/messageSubscription/MessageSubscriptionPanel';
+import style from './MessageSubscription.less';
 
-function Balance({ dispatch }) {
+function MessageSubscription({ dispatch }) {
   return (
     <SingleLayout>
       <NavBar
@@ -17,12 +17,12 @@ function Balance({ dispatch }) {
         }}
         leftContent={
           [<Icon type="left" key="1" />,
-          <label key="2" style={{ color: "#000" }}>积分</label>]
+          <label key="2" style={{ color: "#000" }}>订阅</label>]
         }
       />
-      <BalancePanle />
+      <MessageSubscriptionPanel />
     </SingleLayout>
   )
 }
 
-export default connect()(Balance);
+export default connect()(MessageSubscription);

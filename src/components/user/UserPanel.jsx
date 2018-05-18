@@ -33,7 +33,7 @@ class UserPanel extends Component {
         <List>
           <Item
             className={style.balance}
-            extra={Numeral(this.props.user.balance).format('0,0.00') + " CNY"}
+            extra={Numeral(this.props.user.balance).format('0,0.00') + ""}
             thumb={
               <i className="iconfont" style={{
                 color: 'rgb(51, 163, 244)'
@@ -43,7 +43,7 @@ class UserPanel extends Component {
             onClick={() => {
               this.props.dispatch(routerRedux.push('balance'))
             }}
-          >余额</Item>
+          >积分</Item>
           <Item
             thumb={
               <i className="iconfont" style={{
@@ -64,8 +64,7 @@ class UserPanel extends Component {
             }
             arrow="horizontal"
             onClick={() => {
-              Toast.info("正在施工！", 1)
-              // this.props.dispatch(routerRedux.push('order'))
+              this.props.dispatch(routerRedux.push('message_subscription'))
             }}
           >订阅</Item>
           <Item
