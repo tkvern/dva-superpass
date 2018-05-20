@@ -19,7 +19,6 @@ class MessageSubscriptionPanel extends Component {
     return (
       <div className={style.content}>
         <div className="am-list-header">
-          <h4>订阅状态: <span className={`${style.breatheBtn} ${'green'}`}>推送中...</span></h4>
           <span style={{ fontSize: '13px' }}>Tip:左滑列表查看菜单</span>
         </div>
         <List>
