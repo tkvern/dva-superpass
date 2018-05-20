@@ -34,15 +34,7 @@ class Menus extends Component {
         hidden={this.state.hidden}
         noRenderContent={true}
       >
-        <TabBar.Item
-          // icon={
-          //   <div style={{
-          //     width: '22px',
-          //     height: '22px',
-          //     background: 'url(https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg) center center /  21px 21px no-repeat'
-          //   }}
-          //   />
-          // }
+        {/*<TabBar.Item
           icon={
             <i className="iconfont">&#xe607;</i>
           }
@@ -76,7 +68,7 @@ class Menus extends Component {
           onPress={() => {
             // this.handleSelectedTabSwitch('kline');
           }}
-        />
+        />*/}
         <TabBar.Item
           icon={
             <i className="iconfont">&#xe63f;</i>

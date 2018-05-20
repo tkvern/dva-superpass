@@ -2,18 +2,18 @@ import React from 'react';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
 import { NavBar, Icon } from 'antd-mobile';
-import SingleLayout from '../components/layout/SingleLayout';
-import MessageSubscriptionPanel from '../components/messageSubscription/MessageSubscriptionPanel';
-import style from './MessageSubscription.less';
+import SingleLayout from '../../components/layout/SingleLayout';
+import MessageSubscriptionPanel from '../../components/messageSubscription/MessageSubscriptionPanel';
+import style from './Index.less';
 
-function MessageSubscription({ dispatch }) {
+function Index({ dispatch }) {
   return (
     <SingleLayout>
       <NavBar
         className={style.navbarFixed}
         mode="light"
         onLeftClick={() => {
-          dispatch(routerRedux.push('user'))
+          dispatch(routerRedux.push('/app/user'))
         }}
         leftContent={
           [<Icon type="left" key="1" />,
@@ -25,4 +25,4 @@ function MessageSubscription({ dispatch }) {
   )
 }
 
-export default connect()(MessageSubscription);
+export default connect()(Index);

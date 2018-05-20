@@ -1,0 +1,252 @@
+.content {
+    padding-top: 45px;
+    :global {
+        .am-button {
+            font-size: 17px;
+        }
+    }
+    .itemTip {
+        color: #f76a24;
+        font-size: 13px;
+        line-height: 1.5;
+        .di {
+            color: #e14d4e;
+        }
+        .zo {
+            color: #9db2bd;
+        }
+        .zh {
+            color: #3fc295;
+        }
+    }
+    @diff: 4px;
+    .white {
+        background-color: #fff;
+        position: relative;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+    }
+    .subTitle {
+        line-height: 16px;
+        font-size: 16px;
+        padding: 15px 0px 9px 0px;
+        position: relative;
+        font-weight: bolder;
+    }
+    .formItem {
+        color: rgba(0, 0, 0, .65);
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0; // margin-bottom: 24px;
+        min-height: 48px;
+        .itemLabel {
+            padding: 0 0 8px;
+            margin: 0;
+            display: block;
+            text-align: left;
+            line-height: 1.5;
+            font-size: 13px;
+            label {
+                color: rgba(0, 0, 0, .85);
+                position: relative;
+            }
+        }
+        .itemTip {
+            color: #f76a24;
+            font-size: 13px;
+            line-height: 1.5;
+            .di {
+                color: #e14d4e;
+            }
+            .zo {
+                color: #9db2bd;
+            }
+            .zh {
+                color: #3fc295;
+            }
+        }
+        .odds {
+            height: 40px !important;
+            :global {
+                .ant-radio-button-wrapper {
+                    text-align: center;
+                    width: 24.5%;
+                    height: 40px;
+                    line-height: 40px;
+                }
+            }
+        }
+        .trading {
+            :global {
+                .ant-checkbox-wrapper {
+                    display: table;
+                    text-align: center;
+                    padding: 10px;
+                    height: 21px;
+                    line-height: 21px;
+                    margin-right: 8px;
+                }
+            }
+        }
+        :global {
+            .am-slider-wrapper {
+                height: 35px;
+                margin-top: 15px;
+            }
+            .am-input-item {
+                border: 1px solid #dadde0;
+                box-sizing: border-box;
+                border-radius: 3px;
+            }
+            .ant-radio-group {
+                width: 100%;
+                height: 41px;
+                .ant-radio-wrapper {
+                    width: 30%;
+                    padding: 10px;
+                }
+            }
+        }
+    }
+    .antRow {
+        position: relative;
+        height: auto;
+        zoom: 1;
+        display: block
+    }
+    .price {
+        font-size: 24px;
+        font-weight: bolder;
+        margin-bottom: 0px;
+    }
+    .priceUp {
+        color: #3fc295;
+    }
+    .priceDown {
+        color: #e14d4e;
+    }
+    .priceIncome {
+        font-size: 28px;
+        font-weight: 300;
+        white-space: nowrap;
+        margin: 0px;
+        color: #3fc295;
+    }
+    .priceCNY {
+        margin-top: 0px;
+    }
+    :global {
+        .am-green {
+            color: #fff !important;
+            background-color: #3fc295;
+            border: 1px solid #3fc295;
+            margin-right: 4px;
+            width:~"calc(50% - @{diff})";
+            ::before {
+                border: none;
+            }
+        }
+        .am-green.am-button-active {
+            background-color: #329e79;
+        }
+        .am-red {
+            color: #fff !important;
+            background-color: #e14d4e;
+            border: 1px solid #e14d4e;
+            margin-left: 4px;
+            width:~"calc(50% - @{diff})";
+            ::before {
+                border: none;
+            }
+        }
+        .am-red.am-button-active {
+            background-color: #bd4041;
+        }
+    }
+    .embedWrapperBody {
+        border: 1px solid #dadde0;
+        box-sizing: border-box;
+        border-radius: 4px;
+        overflow: hidden;
+        .tickerContainer {
+            display: table;
+            position: relative;
+            width: 100%;
+            height: 70px;
+            overflow-y: hidden;
+            table-layout: fixed;
+            background-color: #fff;
+            border-radius: 4px;
+            .tickerRow {
+                display: table-row;
+                .tickerItem {
+                    display: table-cell;
+                    position: relative;
+                    padding: 10px 23px;
+                    height: 50px;
+                    background-clip: padding-box;
+                    vertical-align: top;
+                    color: #4a4a4a;
+                    .tickerItemHead {
+                        display: flex;
+                        height: 20px;
+                        width: 100%;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: stretch;
+                        font-size: 13px;
+                        .tickerItemTitle {
+                            display: inline-block;
+                            flex-shrink: 1;
+                            user-select: text;
+                            cursor: pointer;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                        }
+                        .tickerItemLast {
+                            flex-grow: 1;
+                            overflow: visible;
+                            user-select: text;
+                            text-align: right;
+                            color: #4a4a4a;
+                        }
+                        .growing {
+                            color: #3fc295
+                        }
+                        .falling {
+                            color: #ff4a68
+                        }
+                    }
+                    .tickerItemBody {
+                        width: 100%;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        font-size: 22px;
+                        line-height: 26px;
+                        .tickerItemChangeDirection {
+                            display: inline-block;
+                            vertical-align: top;
+                            margin: 2px 9px 0 -3px;
+                            width: 13px;
+                            height: 8px;
+                        }
+                        .tickerItemChangePercent {
+                            user-select: text;
+                        }
+                        .tickerChange {
+                            font-size: 13px;
+                            margin: 0 0 0 8px;
+                        }
+                    }
+                    .up {
+                        color: #3fc295
+                    }
+                    .down {
+                        color: #ff4a68
+                    }
+                }
+            }
+        }
+    }
+}

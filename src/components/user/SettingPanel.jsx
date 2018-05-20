@@ -17,9 +17,9 @@ class SettingPanel extends Component {
 
   showModal = key => (e) => {
     e.preventDefault(); // 修复 Android 上点击穿透
-    this.setState({
-      [key]: true,
-    });
+    // this.setState({
+    //   [key]: true,
+    // });
   }
 
   render() {

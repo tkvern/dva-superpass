@@ -41,10 +41,10 @@ class UserPanel extends Component {
             }
             arrow="horizontal"
             onClick={() => {
-              this.props.dispatch(routerRedux.push('balance'))
+              this.props.dispatch(routerRedux.push('/app/balance'))
             }}
           >积分</Item>
-          <Item
+          {/*<Item
             thumb={
               <i className="iconfont" style={{
                 color: '#f8aa03'
@@ -55,7 +55,7 @@ class UserPanel extends Component {
               Toast.info("正在施工！", 1)
               // this.props.dispatch(routerRedux.push('order'))
             }}
-          >订单</Item>
+          >订单</Item>*/}
           <Item
             thumb={
               <i className="iconfont" style={{
@@ -64,10 +64,10 @@ class UserPanel extends Component {
             }
             arrow="horizontal"
             onClick={() => {
-              this.props.dispatch(routerRedux.push('message_subscription'))
+              this.props.dispatch(routerRedux.push('/app/message_subscription'))
             }}
           >订阅</Item>
-          <Item
+          {/*<Item
             thumb={
               <i className="iconfont" style={{
                 color: '#e8541e'
@@ -78,10 +78,10 @@ class UserPanel extends Component {
               Toast.info("正在施工！", 1)
               // this.props.dispatch(routerRedux.push('order'))
             }}
-          >兑换</Item>
+          >兑换</Item>*/}
         </List>
         <WhiteSpace size="md" />
-        <List>
+        {/*<List>
           <Item
             thumb={
               <i className="iconfont" style={{
@@ -100,8 +100,7 @@ class UserPanel extends Component {
             arrow="horizontal"
             onClick={() => { Toast.info("正在施工！", 1) }}
           >关于</Item>
-          {/*<img alt="tst" src="/11524478118_.pic_hd.jpg" width="100%" />*/}
-        </List>
+          </List>*/}
       </div>);
   }
 }

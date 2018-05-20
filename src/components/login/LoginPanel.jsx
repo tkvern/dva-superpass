@@ -39,7 +39,7 @@ class LoginPanel extends Component {
     return (
       <form>
         <List
-          renderHeader={() => '欢迎登录 BTC 交易平台'}
+          renderHeader={() => '欢迎登录 SuperPass'}
           renderFooter={() => getFieldError('account') && getFieldError('account').join(',')}
         >
           <InputItem
