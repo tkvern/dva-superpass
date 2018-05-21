@@ -76,7 +76,7 @@ class MessageSubscriptionPanel extends Component {
             }
             multipleLine
             arrow="horizontal"
-            onClick={() => console.log('List.Item clicked!')}
+            onClick={() => this.props.showEdit(item)}
           >{item.currency.toUpperCase()}<Brief>频率: {item.reminding_time}分钟</Brief>
           </Item>
         </SwipeAction>

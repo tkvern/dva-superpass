@@ -11,7 +11,6 @@ function Index({ dispatch, messageSubscription }) {
   const messageSubscriptionPanelProps = {
     list: list,
     handleEditOpen(data) {
-      console.log('handleEditOpen ', data);
       dispatch({
         type: 'messageSubscription/editOpen',
         payload: data
@@ -21,6 +20,15 @@ function Index({ dispatch, messageSubscription }) {
       dispatch({
         type: 'messageSubscription/destory',
         payload: data
+      })
+    },
+    showEdit(data) {
+      dispatch(routerRedux.push(`/app/message_subscription/${data.id}/edit`));
+      dispatch({
+        type: 'messageSubscription/showEdit',
+        payload: {
+          current: data
+        }
       })
     }
   }

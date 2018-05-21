@@ -20,6 +20,13 @@ export async function destory(params) {
   });
 }
 
+export async function update(params) {
+  return request(`${config.host}/api/message_subscriptions/${params.id}`, {
+    method: 'PUT',
+    body: JSON.stringify(params),
+  });
+}
+
 export async function editOpen(params) {
   return request(`${config.host}/api/message_subscriptions/${params.id}/edit_open`, {
     method: 'PATCH',

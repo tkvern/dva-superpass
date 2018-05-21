@@ -9,6 +9,7 @@ import Balance from './routes/Balance';
 import Login from './routes/Login';
 import MessageSubscriptionIndex from './routes/MessageSubscription/Index';
 import MessageSubscriptionCreate from './routes/MessageSubscription/Create';
+import MessageSubscriptionEdit from './routes/MessageSubscription/Edit';
 
 function RouterConfig({ history }) {
   return (
@@ -23,6 +24,7 @@ function RouterConfig({ history }) {
         <Route path="/app/balance" exact component={Balance} />
         <Route path="/app/message_subscription" exact component={MessageSubscriptionIndex} />
         <Route path="/app/message_subscription/create" exact component={MessageSubscriptionCreate} />
+        <Route path="/app/message_subscription/:id/edit" exact component={MessageSubscriptionEdit} />
         <Route path="/login" exact component={Login} />
       </Switch>
     </Router>

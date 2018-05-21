@@ -36,7 +36,7 @@ class UserPanel extends Component {
         </Item>
         <WhiteSpace size="md" />
         <List>
-          <Item
+          {/*<Item
             className={style.balance}
             extra={Numeral(this.state.user.score_value).format('0,0.00') + ""}
             thumb={
@@ -48,7 +48,7 @@ class UserPanel extends Component {
             onClick={() => {
               this.props.dispatch(routerRedux.push('/app/balance'))
             }}
-          >积分</Item>
+          >积分</Item>*/}
           {/*<Item
             thumb={
               <i className="iconfont" style={{
