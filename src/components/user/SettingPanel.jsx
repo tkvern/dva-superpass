@@ -29,7 +29,7 @@ class SettingPanel extends Component {
         { text: '取消', onPress: () => { } },
         {
           text: '确认', onPress: () => {
-            delCookie('token');
+            delCookie('access_token');
             localStorage.clear();
             this.props.dispatch(routerRedux.push('/login'));
           }
@@ -44,6 +44,7 @@ class SettingPanel extends Component {
             localStorage.removeItem('ticker');
             localStorage.removeItem('currentOrders');
             localStorage.removeItem('rates');
+            localStorage.removeItem('message_subscriptions');
           }
         },
       ]);

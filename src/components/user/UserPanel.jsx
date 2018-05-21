@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
-import { List, WhiteSpace, Toast } from 'antd-mobile';
+import { List, WhiteSpace } from 'antd-mobile';
 import style from './UserPanel.less';
 import Numeral from 'numeral';
 

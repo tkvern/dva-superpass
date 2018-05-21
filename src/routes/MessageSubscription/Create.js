@@ -7,6 +7,14 @@ import MessageSubscriptionCreate from '../../components/messageSubscription/Mess
 import style from './Create.less';
 
 function Create({ dispatch }) {
+  const messageSubscriptionCreateProps = {
+    onSubmit(data) {
+      dispatch({
+        type: 'messageSubscription/store',
+        payload: data
+      })
+    }
+  }
   return (
     <SingleLayout>
       <NavBar
@@ -20,7 +28,7 @@ function Create({ dispatch }) {
           <label key="2" style={{ color: "#000" }}>添加币种</label>]
         }
       />
-      <MessageSubscriptionCreate />
+      <MessageSubscriptionCreate {...messageSubscriptionCreateProps} />
     </SingleLayout>
   )
 }

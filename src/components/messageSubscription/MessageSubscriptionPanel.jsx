@@ -11,67 +11,74 @@ class MessageSubscriptionPanel extends Component {
     super(props);
 
     this.state = {
+      list: this.props.list,
       refreshing: false,
     }
   }
+  componentWillReceiveProps = (nextProps) => {
+    this.setState({
+      list: nextProps.list,
+    });
+  }
 
   render() {
+    const SwipeList = [];
+    const modelDlg = (is_open, id) => {
+      if (is_open) {
+        return [
+          {
+            text: '关闭',
+            onPress: () => console.log('cancel', id),
+            style: { backgroundColor: '#ddd', color: 'white', width: '68px' },
+          },
+          {
+            text: '删除',
+            onPress: () => console.log('delete', id),
+            style: { backgroundColor: '#e14d4e', color: 'white', width: '68px' },
+          },
+        ];
+      } else {
+        return [
+          {
+            text: '开启',
+            onPress: () => console.log('cancel', id),
+            style: { backgroundColor: '#3fc295', color: 'white', width: '68px' },
+          },
+          {
+            text: '删除',
+            onPress: () => console.log('delete', id),
+            style: { backgroundColor: '#e14d4e', color: 'white', width: '68px' },
+          },
+        ];
+      }
+    }
+    this.state.list.forEach(item => {
+      return SwipeList.push(
+        <SwipeAction
+          key={item.id}
+          style={{ backgroundColor: 'gray' }}
+          autoClose
+          right={modelDlg(item.is_open, item.id)}
+        >
+          <Item
+            extra={
+              item.is_open ? <div className='green'>已开启</div> : <div>已关闭</div>
+            }
+            multipleLine
+            arrow="horizontal"
+            onClick={() => console.log('List.Item clicked!')}
+          >{item.currency.toUpperCase()}<Brief>频率: {item.reminding_time}分钟</Brief>
+          </Item>
+        </SwipeAction>
+      );
+    });
     return (
       <div className={style.content}>
         <div className="am-list-header">
           <span style={{ fontSize: '13px' }}>Tip:左滑列表查看菜单</span>
         </div>
         <List>
-          <SwipeAction
-            style={{ backgroundColor: 'gray' }}
-            autoClose
-            right={[
-              {
-                text: '关闭',
-                onPress: () => console.log('cancel'),
-                style: { backgroundColor: '#ddd', color: 'white', width: '68px' },
-              },
-              {
-                text: '删除',
-                onPress: () => console.log('delete'),
-                style: { backgroundColor: '#e14d4e', color: 'white', width: '68px' },
-              },
-            ]}
-          >
-            <Item
-              extra={
-                <div className='green'>已开启</div>
-              }
-              multipleLine
-              arrow="horizontal"
-              onClick={() => console.log('List.Item clicked!')}
-            >BTC<Brief>频率: 5分钟</Brief>
-            </Item>
-          </SwipeAction>
-          <SwipeAction
-            style={{ backgroundColor: 'gray' }}
-            autoClose
-            right={[
-              {
-                text: '开启',
-                onPress: () => console.log('cancel'),
-                style: { backgroundColor: '#3fc295', color: 'white', width: '68px' },
-              },
-              {
-                text: '删除',
-                onPress: () => console.log('delete'),
-                style: { backgroundColor: '#e14d4e', color: 'white', width: '68px' },
-              },
-            ]}
-          >
-            <Item
-              extra="已关闭"
-              multipleLine
-              arrow="horizontal"
-              onClick={() => console.log('List.Item clicked!')}
-            >ETH<Brief>频率: 60分钟</Brief>
-            </Item>
-          </SwipeAction>
+          {SwipeList}
         </List>
         <WhiteSpace size="md" />
         <div className="am-list-header">

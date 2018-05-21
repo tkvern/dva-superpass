@@ -6,7 +6,11 @@ import SingleLayout from '../../components/layout/SingleLayout';
 import MessageSubscriptionPanel from '../../components/messageSubscription/MessageSubscriptionPanel';
 import style from './Index.less';
 
-function Index({ dispatch }) {
+function Index({ dispatch, messageSubscription }) {
+  const { list } = messageSubscription;
+  const messageSubscriptionPanelProps = {
+    list: list
+  }
   return (
     <SingleLayout>
       <NavBar
@@ -20,9 +24,12 @@ function Index({ dispatch }) {
           <label key="2" style={{ color: "#000" }}>订阅</label>]
         }
       />
-      <MessageSubscriptionPanel />
+      <MessageSubscriptionPanel {...messageSubscriptionPanelProps} />
     </SingleLayout>
   )
 }
 
-export default connect()(Index);
+function mapStateToProps({ messageSubscription }) {
+  return { messageSubscription };
+}
+export default connect(mapStateToProps)(Index);

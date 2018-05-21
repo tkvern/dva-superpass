@@ -22,8 +22,25 @@ class MessageSubscriptionCreate extends Component {
   onSubmit = () => {
     this.props.form.validateFields({ force: true }, (error) => {
       if (!error) {
-        const test = this.props.form.getFieldsValue();
-        console.log(test);
+        const {
+          currency,
+          reminding_time,
+          large_fluctuation_detection,
+          pressure_level_breakthrough,
+          custom_price_breakthrough,
+          news_send,
+          trading_strategy_trading_point,
+        } = this.props.form.getFieldsValue();
+        this.props.onSubmit({
+          currency: currency,
+          reminding_time: reminding_time,
+          large_fluctuation_detection: large_fluctuation_detection,
+          pressure_level_breakthrough: pressure_level_breakthrough ? 1 : 0,
+          custom_price_breakthrough: custom_price_breakthrough,
+          news_send: news_send ? 1 : 0,
+          trading_strategy_trading_point: trading_strategy_trading_point,
+          is_open: 1,
+        })
       } else {
         Toast.fail('请填写完整的订阅信息', 1);
       }
@@ -33,9 +50,9 @@ class MessageSubscriptionCreate extends Component {
   render() {
     const { form } = this.props;
     const { getFieldDecorator, getFieldProps } = form;
-    const options = [];
+    const Options = [];
     optionMaps.forEach(option => {
-      return options.push(<Option key={option.text} value={option.value}>{option.text}</Option>)
+      return Options.push(<Option key={option.text} value={option.value}>{option.text}</Option>)
     });
     return (
       <div className={style.content}>
@@ -64,7 +81,7 @@ class MessageSubscriptionCreate extends Component {
                     optionFilterProp="children"
                     filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                   >
-                    {options}
+                    {Options}
                   </Select>
                 )}
               </div>
@@ -145,6 +162,18 @@ class MessageSubscriptionCreate extends Component {
                 </div>
                 <Switch
                   {...getFieldProps('pressure_level_breakthrough', {
+                    initialValue: true,
+                    valuePropName: 'checked',
+                  })}
+                />
+              </div>
+              <WhiteSpace size="xl" />
+              <div className={`${style.formItem} ${style.antRow}`}>
+                <div className={style.itemLabel}>
+                  <label title="新闻推送">新闻推送</label>
+                </div>
+                <Switch
+                  {...getFieldProps('news_send', {
                     initialValue: true,
                     valuePropName: 'checked',
                   })}
