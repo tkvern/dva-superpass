@@ -61,11 +61,11 @@ class SettingPanel extends Component {
             />
           }>头像</Item>
           <Item extra={this.state.user.username}>账户</Item>
-          <Item extra={this.state.user.wechat_info.NickName}>昵称</Item>
+          <Item extra={this.state.user.nickname}>昵称</Item>
           <Item extra={this.state.user.email}>邮箱</Item>
           {/*<Item extra={this.state.user.phone_number}>手机号</Item>*/}
-          <Item extra={`${this.state.user.wechat_info.Province} ${this.state.user.wechat_info.City}`}>地区</Item>
-          <Item extra={this.state.user.wechat_info.Sex === 1 ? '男' : '女'}>性别</Item>
+          {/*<Item extra={`${this.state.user.wechat_info['Province']} ${this.state.user.wechat_info['City']}`}>地区</Item>*/}
+          {/*<Item extra={this.state.user.wechat_info['Sex'] === 1 ? '男' : '女'}>性别</Item>*/}
           <Item extra={this.state.user.score_value}>积分</Item>
           <Item extra={this.state.user.profit_score_value}>实力</Item>
         </List>

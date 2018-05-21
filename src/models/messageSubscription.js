@@ -1,6 +1,6 @@
 // import { parse } from 'qs';
 import { Toast } from 'antd-mobile';
-import { query, store } from '../services/messageSubscription';
+import { query, store, destory, editOpen } from '../services/messageSubscription';
 import { getLocalStorage, setLocalStorage } from '../utils/helper';
 import { routerRedux } from 'dva/router';
 import pathToRegexp from 'path-to-regexp';
@@ -13,6 +13,11 @@ export default {
   reducers: {
     querySuccess(state, action) {
       return { ...state, ...action.payload };
+    },
+    destorySuccess(state, action) {
+      const id = action.payload;
+      const newList = state.list.filter(item => item.id !== id);
+      return { ...state, list: newList, loading: false };
     },
   },
   effects: {
@@ -36,6 +41,30 @@ export default {
         Toast.success("创建成功", 2);
       } else {
         Toast.fail(`创建失败! ${data.err_msg}`);
+      }
+    },
+    * destory({ payload }, { call, put }) {
+      const { data } = yield call(destory, payload);
+      if (data && data.err_code === 0) {
+        yield localStorage.removeItem('message_subscriptions');
+        yield put({
+          type: 'query'
+        });
+        Toast.success('删除成功!');
+      } else {
+        Toast.fail(`删除失败! ${data.err_msg}`);
+      }
+    },
+    * editOpen({ payload }, { call, put }) {
+      const { data } = yield call(editOpen, payload);
+      if (data && data.err_code === 0) {
+        yield localStorage.removeItem('message_subscriptions');
+        yield put({
+          type: 'query',
+        });
+        Toast.success('操作成功!');
+      } else {
+        Toast.fail(`操作失败! ${data.err_msg}`);
       }
     },
     * checkCache({ payload }, { select, call, put }) {

@@ -9,7 +9,20 @@ import style from './Index.less';
 function Index({ dispatch, messageSubscription }) {
   const { list } = messageSubscription;
   const messageSubscriptionPanelProps = {
-    list: list
+    list: list,
+    handleEditOpen(data) {
+      console.log('handleEditOpen ', data);
+      dispatch({
+        type: 'messageSubscription/editOpen',
+        payload: data
+      })
+    },
+    handleDestory(data) {
+      dispatch({
+        type: 'messageSubscription/destory',
+        payload: data
+      })
+    }
   }
   return (
     <SingleLayout>

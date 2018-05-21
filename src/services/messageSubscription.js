@@ -13,3 +13,17 @@ export async function store(params) {
     body: JSON.stringify(params),
   });
 }
+
+export async function destory(params) {
+  return request(`${config.host}/api/message_subscriptions/${params.id}`, {
+    method: 'DELETE',
+  });
+}
+
+export async function editOpen(params) {
+  return request(`${config.host}/api/message_subscriptions/${params.id}/edit_open`, {
+    method: 'PATCH',
+    body: JSON.stringify(params),
+  });
+}
+

@@ -28,12 +28,17 @@ class MessageSubscriptionPanel extends Component {
         return [
           {
             text: '关闭',
-            onPress: () => console.log('cancel', id),
+            onPress: () => this.props.handleEditOpen({
+              id: id,
+              is_open: 0
+            }),
             style: { backgroundColor: '#ddd', color: 'white', width: '68px' },
           },
           {
             text: '删除',
-            onPress: () => console.log('delete', id),
+            onPress: () => this.props.handleDestory({
+              id: id
+            }),
             style: { backgroundColor: '#e14d4e', color: 'white', width: '68px' },
           },
         ];
@@ -41,12 +46,17 @@ class MessageSubscriptionPanel extends Component {
         return [
           {
             text: '开启',
-            onPress: () => console.log('cancel', id),
+            onPress: () => this.props.handleEditOpen({
+              id: id,
+              is_open: 1
+            }),
             style: { backgroundColor: '#3fc295', color: 'white', width: '68px' },
           },
           {
             text: '删除',
-            onPress: () => console.log('delete', id),
+            onPress: () => this.props.handleDestory({
+              id: id
+            }),
             style: { backgroundColor: '#e14d4e', color: 'white', width: '68px' },
           },
         ];
@@ -83,7 +93,8 @@ class MessageSubscriptionPanel extends Component {
         <WhiteSpace size="md" />
         <div className="am-list-header">
           <div className={style.itemTip}>
-            <label title="tip">可以向机器人发送开始/暂停指令</label>
+            <label title="tip">可以向机器人发送开始/暂停指令</label><br />
+            <label title="tip">普通用户最多可以创建5条订阅信息</label>
           </div>
         </div>
         <WhiteSpace size="md" />
@@ -93,6 +104,7 @@ class MessageSubscriptionPanel extends Component {
           color: 'rgb(51, 163, 244)',
           fontSize: '17px'
         }}>&#xe600;</i>  添加币种</Button>
+        <WhiteSpace size="xl" />
       </div>
     );
   }
