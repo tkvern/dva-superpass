@@ -32,13 +32,14 @@ export default {
   effects: {
     * login({ payload }, { call, put }) {
       const { data } = yield call(login, parse(payload));
-      if (data && data.success) {
-        setCookie('token', data.token, 1);
-        setLocalStorage('user', data.data);
+      if (data && data.err_code === 0) {
+        data.user.wechat_info = JSON.parse(data.user.wechat_info);
+        setCookie('access_token', data.access_token, 1);
+        setLocalStorage('user', data.user);
         yield put({
           type: 'loginSuccess',
           payload: {
-            user: data.data,
+            user: data.user,
           }
         });
         yield put({
@@ -50,7 +51,7 @@ export default {
         yield put(routerRedux.push('/app/user'))
         Toast.success("登录成功！", 2);
       } else {
-        Toast.fail(data.err_msg, 1);
+        Toast.fail(data.err_msg, 1.5);
         yield put({
           type: 'loginFail',
           payload: {
@@ -60,9 +61,9 @@ export default {
       }
     },
     * loginhook({ payload }, { select, call, put }) {
-      const token = getCookie('token');
+      const access_token = getCookie('access_token');
       const user = getLocalStorage('user');
-      if (token && user) {
+      if (access_token && user) {
         yield put({
           type: 'loginSuccess',
           payload: {
@@ -84,9 +85,9 @@ export default {
       }
     },
     * redirect({ payload }, { select, call, put }) {
-      const token = getCookie('token');
+      const access_token = getCookie('access_token');
       const user = getLocalStorage('user');
-      if (token && user) {
+      if (access_token && user) {
         yield put(routerRedux.push('/app/user'));
       }
     }

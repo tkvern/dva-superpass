@@ -12,6 +12,7 @@ class SettingPanel extends Component {
     super(props);
     this.state = {
       modal1: false,
+      user: this.props.user
     }
   }
 
@@ -51,14 +52,21 @@ class SettingPanel extends Component {
       <div className={style.content}>
         <List>
           <Item extra={
-            <img className={style.avatar} alt="avatar" src="https://avatars0.githubusercontent.com/u/10667077?s=460&v=4" style={{ width: '60px', height: '60px' }} />
+            <img
+              className={style.avatar}
+              alt="avatar"
+              src={`http://dummyimage.com/150x150/0a2140/FFFFFF.jpg&text=${this.state.user.username.split('')[0].toUpperCase()}`}
+              style={{ width: '60px', height: '60px' }}
+            />
           }>头像</Item>
-          <Item extra="tkvern">账户</Item>
-          <Item extra="vern">昵称</Item>
-          <Item extra="tkvern@qq.com">邮箱</Item>
-          <Item extra="未绑定">手机号</Item>
-          <Item extra="1,549,136">积分</Item>
-          <Item extra="251,845">实力</Item>
+          <Item extra={this.state.user.username}>账户</Item>
+          <Item extra={this.state.user.wechat_info.NickName}>昵称</Item>
+          <Item extra={this.state.user.email}>邮箱</Item>
+          {/*<Item extra={this.state.user.phone_number}>手机号</Item>*/}
+          <Item extra={`${this.state.user.wechat_info.Province} ${this.state.user.wechat_info.City}`}>地区</Item>
+          <Item extra={this.state.user.wechat_info.Sex === 1 ? '男' : '女'}>性别</Item>
+          <Item extra={this.state.user.score_value}>积分</Item>
+          <Item extra={this.state.user.profit_score_value}>实力</Item>
         </List>
         <WhiteSpace size="md" />
         <Button onClick={showClear}>清空缓存</Button>

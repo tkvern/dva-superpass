@@ -12,7 +12,8 @@ class UserPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      test: 0
+      test: 0,
+      user: this.props.user
     }
   }
 
@@ -23,17 +24,21 @@ class UserPanel extends Component {
           className={style.userinfo}
           arrow="empty"
           thumb={
-            <img className={style.avatar} alt="avatar" src={this.props.user.avatar} style={{ width: '60px', height: '60px' }} />
+            <img
+              className={style.avatar}
+              alt="avatar"
+              src={`http://dummyimage.com/150x150/0a2140/FFFFFF.jpg&text=${this.state.user.username.split('')[0].toUpperCase()}`}
+              style={{ width: '60px', height: '60px' }} />
           }
           onClick={() => { }}
         >
-          {this.props.user.name}<Brief>{this.props.user.email}</Brief>
+          {this.state.user.username}<Brief>{this.state.user.email}</Brief>
         </Item>
         <WhiteSpace size="md" />
         <List>
           <Item
             className={style.balance}
-            extra={Numeral(this.props.user.balance).format('0,0.00') + ""}
+            extra={Numeral(this.state.user.score_value).format('0,0.00') + ""}
             thumb={
               <i className="iconfont" style={{
                 color: 'rgb(51, 163, 244)'

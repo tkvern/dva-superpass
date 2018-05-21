@@ -6,7 +6,11 @@ import SingleLayout from '../components/layout/SingleLayout';
 import style from './Setting.less';
 import SettingPanel from '../components/user/SettingPanel';
 
-function Setting({ dispatch }) {
+function Setting({ dispatch, auth }) {
+  const { user } = auth;
+  const settingPanelProps = {
+    user: user
+  }
   return (
     <SingleLayout>
       <NavBar
@@ -20,9 +24,13 @@ function Setting({ dispatch }) {
           <label key="2" style={{ color: "#000" }}>设置</label>]
         }
       />
-      <SettingPanel />
+      <SettingPanel {...settingPanelProps} />
     </SingleLayout>
   )
 }
 
-export default connect()(Setting);
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+export default connect(mapStateToProps)(Setting);

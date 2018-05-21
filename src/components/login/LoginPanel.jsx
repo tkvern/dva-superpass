@@ -18,7 +18,7 @@ class LoginPanel extends Component {
       if (!error) {
         const { account, password } = this.props.form.getFieldsValue();
         this.props.onSubmit({
-          email: account,
+          account: account,
           password: password
         })
       } else {
@@ -47,7 +47,6 @@ class LoginPanel extends Component {
               // initialValue: 'little ant',
               rules: [
                 { required: true, message: '账号不能为空' },
-                { type: 'email', message: '请输入正确的邮箱地址' },
                 { validator: this.validateAccount },
               ],
             })}
@@ -56,7 +55,7 @@ class LoginPanel extends Component {
             onErrorClick={() => {
               alert(getFieldError('account').join('、'));
             }}
-            type="email"
+            type="text"
             placeholder="请输入邮箱"
           >账号</InputItem>
           <InputItem
