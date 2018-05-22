@@ -96,7 +96,7 @@ class MessageSubscriptionCreate extends Component {
               <Divider>定时播报</Divider>
               <div className={`${style.formItem} ${style.antRow}`}>
                 <div className={style.itemLabel}>
-                  <label title="定时播报频率">定时播报频率</label>
+                  <label title="价格播报">价格播报</label>
                 </div>
                 {getFieldDecorator('reminding_time', {
                   rules: [
@@ -115,7 +115,7 @@ class MessageSubscriptionCreate extends Component {
                 )}
               </div>
               <WhiteSpace size="xl" />
-              <Divider>实时推送提醒</Divider>
+              <Divider>实时推送</Divider>
               <div className={`${style.formItem} ${style.antRow}`}>
                 <div className={style.itemLabel}>
                   <label title="短期大额波动提醒">短期大额波动</label>
