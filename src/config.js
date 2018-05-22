@@ -1,5 +1,5 @@
 const config = {
-  host: 'http://192.168.77.206:8888',
+  host: 'http://superpass.ai',
   appVision: '0.1',
   appAuthor: 'tkvern',
   email: 'verncake@gmail.com',

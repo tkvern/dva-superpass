@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { List, InputItem, Button, Toast } from 'antd-mobile';
+import { List, InputItem, Button, Toast, WhiteSpace, Flex } from 'antd-mobile';
 import { createForm } from 'rc-form';
+import config from '../../config';
 
 const Item = List.Item;
 class LoginPanel extends Component {
@@ -74,6 +75,12 @@ class LoginPanel extends Component {
               onClick={() => {
                 this.onSubmit()
               }}>登录</Button>
+            <WhiteSpace size="xl" />
+            <Flex>
+              <Flex.Item><a href={`${config.host}/user/activate_email`}>未激活?</a></Flex.Item>
+              <Flex.Item style={{ textAlign: 'right' }}><a href={`${config.host}/password/reset`}>忘记密码?</a></Flex.Item>
+            </Flex>
+            <WhiteSpace size="md" />
           </Item>
         </List>
       </form>
