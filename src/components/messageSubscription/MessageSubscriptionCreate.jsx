@@ -173,8 +173,8 @@ class MessageSubscriptionCreate extends Component {
                   <Checkbox.Group
                     className={style.trading} style={{ width: '100%' }}>
                     <Row>
-                      <Col span={12}><Checkbox value="1">EMA交叉平均</Checkbox></Col>
-                      <Col span={12}><Checkbox value="2">SMA交叉平均</Checkbox></Col>
+                      <Col span={12}><Checkbox value="1">EMA交叉均线</Checkbox></Col>
+                      <Col span={12}><Checkbox value="2">CCI顺势指标</Checkbox></Col>
                       <Col span={12}><Checkbox value="3">MACD策略</Checkbox></Col>
                     </Row>
                   </Checkbox.Group>

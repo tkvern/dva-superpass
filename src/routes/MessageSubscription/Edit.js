@@ -27,7 +27,7 @@ function Edit({ dispatch, messageSubscription }) {
         }}
         leftContent={
           [<Icon type="left" key="1" />,
-          <label key="2" style={{ color: "#000" }}>添加币种</label>]
+          <label key="2" style={{ color: "#000" }}>修改币种</label>]
         }
       />
       <MessageSubscriptionEdit {...messageSubscriptionEditProps} />
