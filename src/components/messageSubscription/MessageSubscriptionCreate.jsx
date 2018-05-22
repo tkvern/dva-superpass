@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 // import { routerRedux } from 'dva/router';
 import { WhiteSpace, WingBlank, Button, Switch, Toast } from 'antd-mobile';
-import { Select, Checkbox, Row, Col, Form, Input } from 'antd';
+import { Select, Checkbox, Row, Col, Form, Input, Divider } from 'antd';
 import style from './MessageSubscriptionCreate.less';
 import { createForm } from 'rc-form';
 
@@ -91,17 +91,20 @@ class MessageSubscriptionCreate extends Component {
                 )}
               </div>
               <WhiteSpace size="xl" />
+              <Divider>定时播报</Divider>
               <div className={`${style.formItem} ${style.antRow}`}>
                 <div className={style.itemLabel}>
-                  <label title="定时播报频率">定时播报频率</label>
+                  <label title="价格定时播报">价格定时播报频率</label>
                 </div>
                 {getFieldDecorator('reminding_time', {
                   rules: [
                     { required: true, message: '请选择频率' }
-                  ]
+                  ],
+                  initialValue: '0'
                 })(
                   <Select
                     size='large' placeholder="请选择频率" style={{ width: '100%' }}>
+                    <Option value="0">不播报</Option>
                     <Option value="5">5min</Option>
                     <Option value="15">15min</Option>
                     <Option value="30">30min</Option>
@@ -110,27 +113,33 @@ class MessageSubscriptionCreate extends Component {
                 )}
               </div>
               <WhiteSpace size="xl" />
+              <Divider>实时推送提醒</Divider>
               <div className={`${style.formItem} ${style.antRow}`}>
                 <div className={style.itemLabel}>
-                  <label title="短期大额波动提醒">短期大额波动提醒</label>
+                  <label title="短期大额波动提醒">短期大额波动</label>
                 </div>
                 <Input.Group>
 
-                  {getFieldDecorator('large_fluctuation_detection_percent', {
-                    rules: [
-                      { required: true, message: '请输入幅度' }
-                    ]
-                  })(
-                    <Input size="large" type="number" addonAfter="%" style={{ width: '50%' }} placeholder="0.00" />
-                  )}
                   {getFieldDecorator('large_fluctuation_detection_time', {
                     rules: [
                       { required: true, message: '请输入时间' }
-                    ]
+                    ],
+                    initialValue: '0'
                   })(
-                    <Input size="large" type="number" addonAfter="分钟" style={{ width: '50%' }} placeholder="0" />
+                    <Input size="large" type="number" addonAfter="分钟内波动超过" style={{ width: '55%' }} placeholder="0" />
+                  )}
+                  {getFieldDecorator('large_fluctuation_detection_percent', {
+                    rules: [
+                      { required: true, message: '请输入幅度' }
+                    ],
+                    initialValue: '0.00'
+                  })(
+                    <Input size="large" type="number" addonAfter="% 提醒" style={{ width: '45%' }} placeholder="0.00" />
                   )}
                 </Input.Group>
+                <div>
+                  <label title="tip">设置为0不提醒</label>
+                </div>
                 {/*<Select
                     size="large" placeholder="请选择幅度" style={{ width: '100%' }}>
                     <Option value="1">5%(5min)</Option>
@@ -142,7 +151,7 @@ class MessageSubscriptionCreate extends Component {
               <WhiteSpace size="xl" />
               <div className={`${style.formItem} ${style.antRow}`}>
                 <div className={style.itemLabel}>
-                  <label title="自定义价格突破提醒">自定义价格突破提醒(选填)</label>
+                  <label title="自定义价格突破">自定义价格突破(选填)</label>
                 </div>
                 {getFieldDecorator('custom_price_breakthrough')(
                   <Select
@@ -174,7 +183,7 @@ class MessageSubscriptionCreate extends Component {
               <WhiteSpace size="xl" />
               <div className={`${style.formItem} ${style.antRow}`}>
                 <div className={style.itemLabel}>
-                  <label title="压力位突破提醒">压力位突破提醒</label>
+                  <label title="压力位突破">压力位突破</label>
                 </div>
                 <Switch
                   {...getFieldProps('pressure_level_breakthrough', {

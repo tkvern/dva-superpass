@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
 import { List, WhiteSpace } from 'antd-mobile';
 import style from './UserPanel.less';
-import Numeral from 'numeral';
+// import Numeral from 'numeral';
 
 const Item = List.Item;
 const Brief = Item.Brief;

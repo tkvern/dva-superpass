@@ -88,7 +88,14 @@ export default {
       const access_token = getCookie('access_token');
       const user = getLocalStorage('user');
       if (access_token && user) {
+        yield put({
+          type: 'loginSuccess',
+          payload: {
+            user: user,
+          }
+        });
         yield put(routerRedux.push('/app/user'));
+        Toast.success("已登陆！", 2);
       }
     }
   },

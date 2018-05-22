@@ -25,6 +25,11 @@
         position: relative;
         border-top: 1px solid #ddd;
         border-bottom: 1px solid #ddd;
+        :global{
+          .ant-divider-with-text::before, .ant-divider-with-text::after {
+            border-color: #f76a24;
+          }
+        }
     }
     .subTitle {
         line-height: 16px;

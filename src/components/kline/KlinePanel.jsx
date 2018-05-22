@@ -19,13 +19,17 @@ class KlinePanel extends Component {
           toolbar_bg="#f1f3f6"
           enable_publishing={false}
           hide_side_toolbar={true}
-          allow_symbol_change={false}
-          save_image={false}
+          allow_symbol_change={true}
+          save_image={true}
           details={true}
           calendar={false}
           autosize={true}
           news={[
             "headlines"
+          ]}
+          studies={[
+            "MASimple@tv-basicstudies",
+            "Volume@tv-basicstudies"
           ]}
         />
       </div>
