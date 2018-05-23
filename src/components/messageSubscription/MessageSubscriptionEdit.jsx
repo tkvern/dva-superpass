@@ -153,7 +153,7 @@ class MessageSubscriptionCreate extends Component {
               <WhiteSpace size="xl" />
               <div className={`${style.formItem} ${style.antRow}`}>
                 <div className={style.itemLabel}>
-                  <label title="自定义价格突破">自定义价格突破(选填)</label>
+                  <label title="自定义价格突破">自定义价格突破(选填)  单位:USDT</label>
                 </div>
                 {getFieldDecorator('custom_price_breakthrough', {
                   initialValue: this.state.current.custom_price_breakthrough ? this.state.current.custom_price_breakthrough : []

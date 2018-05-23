@@ -34,7 +34,7 @@ export default {
       const { data } = yield call(login, parse(payload));
       if (data && data.err_code === 0) {
         data.user.wechat_info = JSON.parse(data.user.wechat_info);
-        setCookie('access_token', data.access_token, 0.5);
+        setCookie('access_token', data.access_token, 720);
         setLocalStorage('user', data.user);
         yield put({
           type: 'loginSuccess',
@@ -48,7 +48,7 @@ export default {
             isLogined: true,
           }
         });
-        yield put(routerRedux.push('/app/user'))
+        yield put(routerRedux.push('/app/user'));
         Toast.success("登录成功！", 2);
       } else {
         Toast.fail(data.err_msg, 1.5);

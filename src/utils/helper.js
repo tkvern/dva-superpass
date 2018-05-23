@@ -9,11 +9,11 @@ export function getLocalStorage(key) {
 }
 
 // Operation Cookie
-export function setCookie(c_name, value, expiredays) {
+export function setCookie(c_name, value, expireMinute) {
   var exdate = new Date()
-  exdate.setDate(exdate.getDate() + expiredays)
+  exdate.setDate(exdate.getTime() + expireMinute * 60 * 1000);
   document.cookie = c_name + "=" + escape(value) +
-    ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString())
+    ((expireMinute == null) ? "" : ";expires=" + exdate.toGMTString())
 }
 
 export function getCookie(c_name) {
