@@ -34,7 +34,7 @@ export default {
       const { data } = yield call(login, parse(payload));
       if (data && data.err_code === 0) {
         data.user.wechat_info = JSON.parse(data.user.wechat_info);
-        setCookie('access_token', data.access_token, 1);
+        setCookie('access_token', data.access_token, 0.5);
         setLocalStorage('user', data.user);
         yield put({
           type: 'loginSuccess',

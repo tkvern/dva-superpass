@@ -47,7 +47,7 @@ class LoginPanel extends Component {
             {...getFieldProps('account', {
               // initialValue: 'little ant',
               rules: [
-                { required: true, message: '账号不能为空' },
+                { required: true, message: '账户不能为空' },
                 { validator: this.validateAccount },
               ],
             })}
@@ -57,7 +57,7 @@ class LoginPanel extends Component {
               alert(getFieldError('account').join('、'));
             }}
             type="text"
-            placeholder="请输入邮箱"
+            placeholder="请输入邮箱或账户"
           >账号</InputItem>
           <InputItem
             {...getFieldProps('password', {
