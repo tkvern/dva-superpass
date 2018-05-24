@@ -34,3 +34,8 @@ export async function editOpen(params) {
   });
 }
 
+export async function currencyDetail() {
+  return request(`${config.host}/api/currency_details`, {
+    method: 'GET',
+  })
+}

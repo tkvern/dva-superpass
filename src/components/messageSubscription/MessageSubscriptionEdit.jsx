@@ -16,7 +16,9 @@ class MessageSubscriptionCreate extends Component {
     super(props);
     this.state = {
       refreshing: false,
-      current: this.props.current
+      current: this.props.current,
+      currency_detail: this.props.currency_detail,
+      currency: undefined,
     }
   }
   onSubmit = () => {
@@ -50,6 +52,26 @@ class MessageSubscriptionCreate extends Component {
       } else {
         Toast.fail('请填写完整的订阅信息', 1);
       }
+    });
+  }
+  componentWillMount = () => {
+    this.props.dispatch({
+      type: "messageSubscription/queryCurrenyDetails"
+    });
+  }
+  componentDidMount = () => {
+    if (this.state.currency_detail.content) {
+      const value = this.props.current.currency.toUpperCase();
+      const currencys = JSON.parse(this.state.currency_detail.content);
+      const currency = currencys[value];
+      this.setState({
+        currency: currency
+      })
+    }
+  }
+  componentWillReceiveProps = (nextProps) => {
+    this.setState({
+      currency_detail: nextProps.currency_detail,
     });
   }
 
@@ -86,6 +108,17 @@ class MessageSubscriptionCreate extends Component {
                     style={{ width: '100%' }}
                     placeholder="请选择或输入币种关键字"
                     optionFilterProp="children"
+                    onChange={(value) => {
+                      value = value.toUpperCase();
+                      console.log(this.state);
+                      if (this.state.currency_detail.content) {
+                        const currencys = JSON.parse(this.state.currency_detail.content);
+                        const currency = currencys[value];
+                        this.setState({
+                          currency: currency,
+                        })
+                      }
+                    }}
                     filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                   >
                     {Options}
@@ -153,7 +186,15 @@ class MessageSubscriptionCreate extends Component {
               <WhiteSpace size="xl" />
               <div className={`${style.formItem} ${style.antRow}`}>
                 <div className={style.itemLabel}>
-                  <label title="自定义价格突破">自定义价格突破(选填)  单位:USDT</label>
+                  <label title="自定义价格突破">自定义价格突破(选填)</label><br />
+                  <label title="更新时间">
+                    更新时间: {this.state.currency_detail.updated_at}
+                  </label><br />
+                  <label title="当前价格">
+                    当前价格: <span style={{ color: '#f76a24', marginRight: '10px' }}>
+                      {this.state.currency ? this.state.currency.price_USDT + ' USDT' : '无数据'}
+                    </span>
+                  </label>
                 </div>
                 {getFieldDecorator('custom_price_breakthrough', {
                   initialValue: this.state.current.custom_price_breakthrough ? this.state.current.custom_price_breakthrough : []

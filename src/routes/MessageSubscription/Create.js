@@ -6,14 +6,16 @@ import SingleLayout from '../../components/layout/SingleLayout';
 import MessageSubscriptionCreate from '../../components/messageSubscription/MessageSubscriptionCreate';
 import style from './Create.less';
 
-function Create({ dispatch }) {
+function Create({ dispatch, messageSubscription }) {
+  const { currency_detail } = messageSubscription;
   const messageSubscriptionCreateProps = {
     onSubmit(data) {
       dispatch({
         type: 'messageSubscription/store',
         payload: data
       })
-    }
+    },
+    currency_detail: currency_detail
   }
   return (
     <SingleLayout>
@@ -32,5 +34,7 @@ function Create({ dispatch }) {
     </SingleLayout>
   )
 }
-
-export default connect()(Create);
+function mapStateToProps({ messageSubscription }) {
+  return { messageSubscription };
+}
+export default connect(mapStateToProps)(Create);

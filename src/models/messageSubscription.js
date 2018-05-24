@@ -1,6 +1,6 @@
 // import { parse } from 'qs';
 import { Toast } from 'antd-mobile';
-import { query, store, destory, update, editOpen } from '../services/messageSubscription';
+import { query, store, destory, update, editOpen, currencyDetail } from '../services/messageSubscription';
 import { getLocalStorage, setLocalStorage } from '../utils/helper';
 import { routerRedux } from 'dva/router';
 import pathToRegexp from 'path-to-regexp';
@@ -21,7 +21,8 @@ export default {
       trading_strategy_trading_point: null,
       updated_at: "2018-05-21 20:47:41",
       user_id: 1
-    }
+    },
+    currency_detail: {}
   },
   reducers: {
     showEdit(state, action) {
@@ -108,6 +109,18 @@ export default {
         });
       }
     },
+    * queryCurrenyDetails({ payload }, { select, call, put }) {
+      const { data } = yield call(currencyDetail);
+      if (data && data.err_code === 0) {
+        // setLocalStorage('message_subscriptions', data.list);
+        yield put({
+          type: 'querySuccess',
+          payload: {
+            currency_detail: data.currency_detail,
+          },
+        });
+      }
+    }
   },
   subscriptions: {
     setup({ dispatch, history }) {

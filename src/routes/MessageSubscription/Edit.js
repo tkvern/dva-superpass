@@ -7,7 +7,7 @@ import MessageSubscriptionEdit from '../../components/messageSubscription/Messag
 import style from './Create.less';
 
 function Edit({ dispatch, messageSubscription }) {
-  const { current } = messageSubscription;
+  const { current, currency_detail } = messageSubscription;
   const messageSubscriptionEditProps = {
     onSubmit(data) {
       dispatch({
@@ -15,7 +15,8 @@ function Edit({ dispatch, messageSubscription }) {
         payload: data
       })
     },
-    current: current
+    current: current,
+    currency_detail: currency_detail
   }
   return (
     <SingleLayout>
